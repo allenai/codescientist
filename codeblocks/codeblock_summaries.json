@@ -1,0 +1,199 @@
+{
+    "DiscoveryWorld API Example": {
+        "name": "DiscoveryWorld API Example",
+        "description": "This code template demonstrates how to interact with the DiscoveryWorld API, an interactive text-based and optionally 2D game designed to test end-to-end scientific discovery capabilities. It includes a simple random agent that randomly selects actions to take within the game environment.",
+        "libraries": [
+            "discoveryworld",
+            "json",
+            "time",
+            "random",
+            "copy",
+            "traceback"
+        ],
+        "when_to_use": "Use this code template when you need to create an agent or human interface to interact with DiscoveryWorld games, scenarios, or tasks. It is particularly useful for experiments involving automated agents in scientific discovery simulations or for testing agent behavior in interactive environments.",
+        "examples": "The template includes an example of a random agent that interacts with the DiscoveryWorld environment by randomly selecting actions. It demonstrates how to initialize the API, load scenarios, and perform actions within the game.",
+        "kinds_of_ideas": "This code template is well-suited for experiments involving agent-based simulations, interactive learning environments, and automated scientific discovery processes. It is ideal for testing agent decision-making, exploring game-based learning, and developing AI systems for complex problem-solving tasks.",
+        "inclusion_criteria": "You would normally use this codeblock if you'd like an agent (or human) to play/interact with one or more DiscoveryWorld games/scenarios/tasks, and would like to see an example of how to do so.",
+        "exclusion_criteria": "If you're not specifically using DiscoveryWorld, this codeblock will likely not be useful (except perhaps as a broad example of how to interface with a text-based game)."
+    },
+    "Logger/Debugging": {
+        "name": "Logger/Debugging",
+        "description": "This code template provides a required example of using a built-in logger/debugger in the execution environment. It is essential for logging and debugging purposes, ensuring that messages of various severity levels (info, warning, error, debug) are recorded. The logger should be instantiated globally to prevent log file overwriting and to maintain consistent logging throughout the code.",
+        "libraries": [
+            "experiment_common_library"
+        ],
+        "when_to_use": "This code template should be used in all experiments and systems where logging and debugging are necessary. It is universally applicable and required for tracking execution flow, capturing errors, and providing informative messages for debugging purposes.",
+        "examples": "The template includes examples demonstrating logging of informational, warning, error, and debug messages. It also shows how to log errors explicitly caught during dictionary key iteration, highlighting the importance of informative error messages.",
+        "kinds_of_ideas": "This template is particularly well-suited for experiments and systems that require robust error tracking, execution monitoring, and debugging. It is ideal for any scientific experiment or software system where understanding the flow of execution and capturing errors is critical.",
+        "inclusion_criteria": "This codeblock helps you log and debug, and is always useful.",
+        "exclusion_criteria": "There are no exclusion criteria for this codeblock -- you must ALWAYS include the logger/debugger codeblock."
+    },
+    "MatPlotLib Line Plot": {
+        "name": "MatPlotLib Line Plot",
+        "description": "This code template provides functionality to create line plots with multiple series using MatPlotLib. It supports customization of plot titles, axis labels, and series labels, and can save plots to PDF files. It is designed for headless environments using the Agg backend.",
+        "libraries": [
+            "matplotlib",
+            "numpy"
+        ],
+        "when_to_use": "Use this code template when you need to create line plots with one or more data series in Python, especially in headless environments. It is suitable for experiments requiring visualization of time series data, comparison of multiple datasets, or any scenario where graphical representation of data trends is needed.",
+        "examples": "The template includes two examples: one demonstrates plotting three series with custom keys and displaying the plot, while the other generates sine and cosine wave data, plots them, and saves the plot to a PDF file.",
+        "kinds_of_ideas": "This template is well-suited for experiments involving data visualization, trend analysis, comparison of multiple datasets, and presentation of time series data. It is ideal for scientific research, data analysis, and educational purposes where visual representation of data is crucial.",
+        "inclusion_criteria": "If you are creating plots, this codeblock is likely to be useful.",
+        "exclusion_criteria": "If you are not creating any plots, this codeblock is unlikely to be useful."
+    },
+    "ReAct Agent Example": {
+        "name": "ReAct Agent Example",
+        "description": "This code template provides an implementation of a ReAct (reasoning-then-act) agent, designed for environments with specific action spaces, such as text-based games. It includes separate 'think' and 'act' steps, utilizing a language model to generate responses based on observations and task descriptions.",
+        "libraries": [
+            "json"
+        ],
+        "when_to_use": "Use this code template when implementing an agent that requires reasoning and action steps in environments like text-based games or simulations. It is suitable for experiments involving interactive environments where agents need to process observations and decide on actions based on a predefined action space.",
+        "examples": "The template includes an example function 'example1' that demonstrates the use of the ReAct agent in a simulated environment, showcasing the agent's ability to process observations, think, and act over multiple steps.",
+        "kinds_of_ideas": "This template is well-suited for experiments involving agent-based simulations, interactive storytelling, decision-making processes in constrained action spaces, and testing agent reasoning capabilities in text-based environments.",
+        "inclusion_criteria": "You would normally use this codeblock if you'd like to implement a ReAct (i.e. reasoning-then-act, or alternatively think-then-act) agent, or an agent derived from that concept.",
+        "exclusion_criteria": "If you're not implementing an agent, this codeblock is unlikely to be useful."
+    },
+    "DiscoveryWorld Knowledge Scorer Script": {
+        "name": "DiscoveryWorld Knowledge Scorer Script",
+        "description": "This code template provides a method to score an agent's explanatory knowledge in DiscoveryWorld scenarios by comparing it against gold standard knowledge using OpenAI's GPT-4o. It evaluates the agent's responses to critical questions in the task and produces a normalized explanatory knowledge score.",
+        "libraries": [
+            "discoveryworld",
+            "os",
+            "time",
+            "json",
+            "openai"
+        ],
+        "when_to_use": "Use this code template when you have an agent or human interacting with DiscoveryWorld scenarios and need to evaluate their explanatory knowledge automatically. It is specifically designed for experiments involving DiscoveryWorld tasks and scenarios.",
+        "examples": "The example provided demonstrates evaluating an agent's knowledge in a scenario named 'Space Sick' with a simple knowledge base fact. It shows how to initialize the KnowledgeScorer, evaluate knowledge, and interpret the output scores.",
+        "kinds_of_ideas": "This template is well-suited for experiments focused on assessing explanatory knowledge in interactive environments, particularly those involving scientific discovery tasks. It is ideal for scenarios where automated scoring of knowledge against predefined criteria is required.",
+        "inclusion_criteria": "You would normally only use this codeblock if you have an agent (or human) playing DiscoveryWorld scenarios, *and* you want to use the automatic scorer to evaluate their explanatory knowledge (which this codeblock shows).",
+        "exclusion_criteria": "If you are not specifically evaluating explanatory knowledge *in DiscoveryWorld*, this codeblock is unlikely to be useful.  The DiscoveryWorld Knowledge Scorer only works for DiscoveryWorld tasks/scenarios."
+    },
+    "Memory Agent Example": {
+        "name": "Memory Agent Example",
+        "description": "This code template demonstrates the implementation of an LLM-based agent architecture augmented with memory capabilities. It includes a memory management system for storing, retrieving, and updating memories, and a framework for integrating with a simulator or environment. The agent uses memory to inform decision-making in a text-based interactive setting.",
+        "libraries": [
+            "json",
+            "copy"
+        ],
+        "when_to_use": "Use this code template when developing experiments or systems that require an agent to maintain and utilize a memory of past interactions to make informed decisions. It is particularly useful for experiments involving reinforcement learning, interactive simulations, or games where historical context is crucial for performance.",
+        "examples": "The template includes an example of a memory agent interacting with a placeholder simulator. It demonstrates the agent's ability to reflect on past actions and observations, update its memory, and choose actions based on its current state and memory.",
+        "kinds_of_ideas": "This template is well-suited for exploring concepts related to memory-augmented agents, reinforcement learning with memory, decision-making in dynamic environments, and the integration of LLMs with memory systems. It can be used to test hypotheses about the impact of memory on agent performance and behavior.",
+        "inclusion_criteria": "You would normally use this codeblock if you'd like to implement an agent that keeps some kind of extracted or abstracted memory of its past, that it can use to help make future decisions.",
+        "exclusion_criteria": "If you're not implementing an agent, or not implementing an agent that needs to remember things, this codeblock is unlikely to be useful."
+    },
+    "DOT Graphviz Graph": {
+        "name": "DOT Graphviz Graph",
+        "description": "This code template demonstrates the creation of graphs using DOT/Graphviz, including generating DOT files and exporting them as visual graphs in PDF format. It includes examples of simple graphs and graphs with labeled edges.",
+        "libraries": [
+            "experiment_common_library"
+        ],
+        "when_to_use": "Use this code template when you need to create and visualize graphs composed of nodes and edges, particularly when utilizing DOT/Graphviz for graph representation and visualization. It is suitable for experiments requiring graph generation, visualization, or manipulation.",
+        "examples": "The template includes two examples: one demonstrating a simple 3-node graph and another showing a graph with labeled edges. Both examples illustrate the process of creating DOT files and converting them into visual graphs using Graphviz.",
+        "kinds_of_ideas": "This code template is well-suited for experiments involving graph theory, network analysis, data visualization, and any scenario where representing relationships between entities as graphs is required.",
+        "inclusion_criteria": "If you want to create graphs (i.e. composed of nodes and edges), either generally (in text), or exporting them (visually), then you may want to use this codeblock.",
+        "exclusion_criteria": "If you are not creating graphs (composed of nodes and edges), or using DOT/Graphviz related concepts, then this codeblock is unlikely to be useful."
+    },
+    "ScienceWorld API Example": {
+        "name": "ScienceWorld API Example",
+        "description": "This code template demonstrates how to interact with the ScienceWorld API, an interactive text-based game for testing elementary science knowledge. It includes a simple random agent that selects actions randomly within the ScienceWorld environment, showcasing how to set up tasks, run episodes, and log results.",
+        "libraries": [
+            "scienceworld",
+            "random"
+        ],
+        "when_to_use": "Use this code template when you need to create an agent or human interaction with ScienceWorld games, scenarios, or tasks. It is particularly useful for experiments involving text-based game environments, agent-based simulations, or educational tools in science. It is not suitable for non-ScienceWorld environments.",
+        "examples": "The template includes an example of a random agent baseline that runs on the ScienceWorld environment, demonstrating task setup, environment interaction, and result logging.",
+        "kinds_of_ideas": "This template is well-suited for experiments in agent-based learning, reinforcement learning, educational game development, and interactive simulations in science education. It is ideal for testing agent performance in text-based environments and exploring task variation handling.",
+        "inclusion_criteria": "You would normally use this codeblock if you'd like an agent (or human) to play/interact with one or more ScienceWorld games/scenarios/tasks, and would like to see an example of how to do so.",
+        "exclusion_criteria": "If you're not specifically using ScienceWorld, this codeblock will likely not be useful (except perhaps as a broad example of how to interface with a text-based game)."
+    },
+    "WordNet with NLTK (Comprehensive Guide)": {
+        "name": "WordNet with NLTK (Comprehensive Guide)",
+        "description": "This code template provides a comprehensive guide to using WordNet in Python via the NLTK library. It includes functions to retrieve synsets, definitions, synonyms, antonyms, hypernyms, hyponyms, and meronyms for a given word. It is designed to facilitate lexical database operations using WordNet.",
+        "libraries": [
+            "nltk"
+        ],
+        "when_to_use": "Use this code template when conducting experiments or building systems that require lexical database operations, such as natural language processing tasks involving semantic analysis, word sense disambiguation, or linguistic research. It is specifically useful when WordNet's lexical relations like synonyms, antonyms, hypernyms, hyponyms, and meronyms are needed.",
+        "examples": "The code template includes an example usage function that demonstrates retrieving synsets, words in synsets, definitions, synonyms, antonyms, direct and continuous hypernyms and hyponyms, and part meronyms for the word 'car'.",
+        "kinds_of_ideas": "This code template is well-suited for ideas and experiments related to semantic analysis, word sense disambiguation, linguistic research, and natural language processing tasks that require understanding and utilizing lexical relationships in WordNet.",
+        "inclusion_criteria": "If you'd like to use WordNet (a lexical database with limited coverage of synonyms, antonyms, hypernyms, hyponyms, meronyms), this codeblock is likely to be useful.",
+        "exclusion_criteria": "If you're not explicitly using WordNet, this codeblock likely will not be useful."
+    },
+    "ConceptNet Knowledge Base": {
+        "name": "ConceptNet Knowledge Base",
+        "description": "This code template provides fast, local access to the English subset of the ConceptNet knowledge base. It is a pre-processed version that simplifies usage by focusing on node names and edges, excluding other metadata. It allows for operations such as finding nodes by prefix, retrieving edges for specific nodes, and listing all relation types.",
+        "libraries": [
+            "os",
+            "json",
+            "subprocess",
+            "experiment_common_library"
+        ],
+        "when_to_use": "Use this code template when you need to access and manipulate the English subset of the ConceptNet knowledge base in experiments involving semantic networks, natural language processing, or knowledge representation. It is particularly useful for tasks requiring quick lookups of nodes and edges or exploring semantic relationships.",
+        "examples": "The code includes examples demonstrating how to find nodes starting with a specific term, retrieve edges for a node, and list all relation types. These examples illustrate the basic operations available for interacting with the ConceptNet data.",
+        "kinds_of_ideas": "This code template is well-suited for experiments involving semantic analysis, ontology exploration, language understanding, and AI systems that require a structured knowledge base for reasoning or inference tasks.",
+        "inclusion_criteria": "If you need to access ConceptNet knowledge base, and need the English subset, this codeblock is likely to be useful.",
+        "exclusion_criteria": "If you don't need to access ConceptNet knowledge base, or need a different language subset, this codeblock is unlikely to be useful. Similarly, this pre-processed version contains only the node names and edges, and discards all other metadata."
+    },
+    "TextWorldExpress API Example": {
+        "name": "TextWorldExpress API Example",
+        "description": "This code template demonstrates how to use the TextWorldExpress API, a simulator for interactive text-based games. It includes a random agent example that interacts with various games such as CookingWorld, TextWorld Common Sense, Coin Collector, MapReader, Arithmetic, and Sorting. The environments are parametrically generated based on a seed, with different seeds for train/dev/test sets. The template provides a framework for initializing environments, running episodes, and collecting performance metrics.",
+        "libraries": [
+            "time",
+            "random",
+            "argparse",
+            "json",
+            "textworld_express"
+        ],
+        "when_to_use": "Use this code template when you need to simulate and interact with text-based games using the TextWorldExpress API. It is suitable for experiments involving agent interaction with text-based environments, testing agent performance, or generating training data from game episodes.",
+        "examples": "The template includes an example of a random agent that selects actions randomly in a given game environment. It demonstrates how to initialize the environment, run multiple episodes, and collect performance metrics such as scores and completion rates.",
+        "kinds_of_ideas": "This code template is well-suited for experiments in reinforcement learning, agent-based simulations, procedural content generation, and testing agent strategies in text-based environments. It is also useful for developing and evaluating interactive narrative systems.",
+        "inclusion_criteria": "You would normally use this codeblock if you'd like an agent (or human) to play/interact with one or more games/scenarios/tasks provided with TextWorldExpress, and would like to see an example of how to do so.",
+        "exclusion_criteria": "If you're not specifically using TextWorldExpress, this codeblock will likely not be useful (except perhaps as a broad example of how to interface with a text-based game)."
+    },
+    "LLM example through proxy server": {
+        "name": "LLM example through proxy server",
+        "description": "This code template demonstrates how to use API-based language models (LLMs) from OpenAI, Anthropic, or Together.AI through a litellm proxy server, which is mandatory for managing costs. It includes examples of querying multiple LLMs with the same prompt, formatting prompts for JSON output, and obtaining embeddings for text strings.",
+        "libraries": [
+            "os",
+            "time",
+            "json",
+            "requests",
+            "experiment_common_library"
+        ],
+        "when_to_use": "Use this code template when conducting experiments that require interaction with API-based language models from OpenAI, Anthropic, or Together.AI, especially when cost management through a proxy server is necessary. It is suitable for experiments involving LLM responses, JSON output formatting, and text embeddings.",
+        "examples": "The template includes examples demonstrating querying multiple LLMs with a common prompt, formatting prompts for JSON output, and obtaining and comparing text embeddings using cosine similarity.",
+        "kinds_of_ideas": "This template is well-suited for experiments involving natural language processing, cost-effective LLM usage, prompt engineering, JSON data extraction, and text similarity analysis using embeddings.",
+        "inclusion_criteria": "If you need to use an API-based language model (e.g. OpenAI, Anthropic, Together.AI, etc.), then you *need* this codeblock.",
+        "exclusion_criteria": "If you're not using an API-based language model, then this codeblock is unlikely to be useful."
+    },
+    "Non-parametric Bootstrap Resampling": {
+        "name": "Non-parametric Bootstrap Resampling",
+        "description": "This code template demonstrates the use of non-parametric bootstrap resampling to compare the performance of two models on the same dataset. It calculates difference scores and performs hypothesis testing to determine if the performance difference is statistically significant.",
+        "libraries": [
+            "random",
+            "json",
+            "sys",
+            "os",
+            "experiment_common_library"
+        ],
+        "when_to_use": "Use this code template when comparing the performance of two or more models or groups to determine if there is a statistically significant difference. It is suitable for experiments involving model evaluation, hypothesis testing, and performance comparison across different tasks or conditions.",
+        "examples": "The code includes three examples: 1) Comparing baseline and experimental model scores stored as a list of dictionaries, 2) Comparing scores stored in parallel arrays, and 3) Evaluating model performance across multiple tasks with repeated runs, including multiple hypothesis testing with Bonferroni correction.",
+        "kinds_of_ideas": "This template is well-suited for experiments involving model performance comparison, statistical hypothesis testing, evaluation of experimental vs. baseline models, and analysis of performance across different tasks or conditions. It is particularly useful for non-parametric statistical analysis and resampling methods.",
+        "inclusion_criteria": "If you are comparing two or more groups (e.g. a baseline group and an experimental group) to see if they are significantly different, this codeblock is likely to be useful.",
+        "exclusion_criteria": "If you are not comparing two or more groups to see if they are significantly different, this codeblock is unlikely to be useful."
+    },
+    "Data generation with LLM": {
+        "name": "Data generation with LLM",
+        "description": "This code template demonstrates the use of a large language model (LLM) to generate datasets. It includes functionality to query multiple LLMs with a specified prompt, generate datasets if they do not already exist, and save the generated datasets. The template is designed to maintain consistency across experiments by checking for existing datasets before generating new ones.",
+        "libraries": [
+            "os",
+            "json",
+            "experiment_common_library"
+        ],
+        "when_to_use": "Use this code template when you need to generate datasets using a large language model, particularly for experiments that require creative or language-based data generation. It is suitable for generating educational content, such as multiple-choice questions, or any dataset where LLMs can provide valuable input.",
+        "examples": "The template includes two examples: 'example1' demonstrates generating a dataset of 4th grade science multiple-choice questions using an LLM, while 'example2_negative' illustrates a scenario where LLMs are not suitable, such as generating arithmetic problems.",
+        "kinds_of_ideas": "This code template is well-suited for experiments involving educational content generation, creative data generation tasks, and scenarios where LLMs can provide diverse and language-rich datasets. It is not suitable for tasks requiring high precision in arithmetic or other areas where LLMs are known to perform poorly.",
+        "inclusion_criteria": "If you'd like to generate a dataset using a large language model, then you may want to use this codeblock.",
+        "exclusion_criteria": "If you don't want to generate a dataset using a large language model, then you may not find this codeblock useful."
+    }
+}

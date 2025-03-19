@@ -1,0 +1,120 @@
+[    
+    {
+        "research_idea_name": "simulation-confidence-analysis",
+        "research_idea_long_description": "Study whether LLMs can accurately assess their confidence in state predictions, and whether this confidence correlates with actual accuracy. This could enable more reliable simulation by identifying when predictions are likely to be incorrect.",
+        "research_idea_short_description": "Investigate LLM ability to assess confidence in state predictions and correlation with accuracy.",
+        "research_idea_hypothesis": "LLM confidence scores will correlate with prediction accuracy, allowing for identification of potentially incorrect predictions.",
+        "research_idea_variables": "Independent variables: State complexity, Game type, Property type. Dependent variables: Prediction accuracy, Confidence score. Control: Same LLM, same states, same examples.",
+        "research_idea_metric": "Correlation between confidence scores and accuracy. Precision/recall for identifying incorrect predictions using confidence thresholds.",
+        "research_idea_pilot": "Test on simple CookingWorld scenarios, focusing on boolean property predictions with confidence scores.",
+        "research_idea_design_prompt": "Create an experiment to analyze LLM confidence in state predictions. Use TextWorldExpress to generate 200 state transitions. For each prediction, prompt GPT-4 to provide both the predicted state and a confidence score (0-100) for each property change. Log all predictions, confidence scores, and ground truth. Calculate correlation between confidence and accuracy. Generate ROC curves for using confidence to predict correctness. Use bootstrap resampling to compute confidence intervals. Create visualizations showing relationship between confidence and accuracy across different property types.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Non-parametric Bootstrap Resampling",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [],
+        "research_idea_external_requirements": [],
+        "metadata": {
+            "date_generated": "2024-12-20 15:46:21",
+            "inspiring_paper_ids": [
+                "2406.06485"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "",
+            "cost_for_this_idea": 0.0,
+            "time_seconds_for_this_idea": 0.0,
+            "simplified": false
+        },
+        "id": "unittest-2",
+        "scores": {
+            "score": 1,
+            "num_unknown_components": 0
+        },
+        "rating": "very interesting",
+        "rating_notes": "Unit test -- this one turned up interesting results on a pilot experiment. Measuring prediction accuracy could be done using LLM-as-a-judge (e.g. have the model predict the observation, then have another LLM compare this generated observation to the gold observation, counting (perhaps by sentence, or by item) the number of things that are the same, and the number that are different, arriving at a score between 0-1 for each state prediction.  Similarly, do to the task well, the LLM doing the state prediction task should probably have at least the last 2-3 observations/actions in its prompt, to provide some context.",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Unit test -- this one turned up interesting results on a pilot experiment. Measuring prediction accuracy could be done using LLM-as-a-judge (e.g. have the model predict the observation, then have another LLM compare this generated observation to the gold observation, counting (perhaps by sentence, or by item) the number of things that are the same, and the number that are different, arriving at a score between 0-1 for each state prediction.  Similarly, do to the task well, the LLM doing the state prediction task should probably have at least the last 2-3 observations/actions in its prompt, to provide some context.",
+            "operationalization_description": "Please create an experiment to analyze LLM confidence in state predictions in TextWorldExpress, implementing the following specifications:\n\n1. EXPERIMENT MODES AND SCOPE:\nImplement a global variable PILOT_MODE that can be set to one of: 'MINI_PILOT', 'PILOT', or 'FULL_EXPERIMENT'. Configure the following settings for each mode:\n- MINI_PILOT: Use 3 episodes of CookingWorld, 10 steps each, from training set\n- PILOT: Use 20 episodes of CookingWorld, 25 steps each, from training set\n- FULL_EXPERIMENT: Use 200 episodes, 50 steps each, balanced across train/dev/test sets\n\n2. ENVIRONMENT SETUP:\n- Use TextWorldExpress API to generate CookingWorld scenarios\n- Configure simple environments: 3 rooms, no doors, 2 ingredients, 2 distractor items\n- For each step, record: current state, action taken, next state\n\n3. LLM CONFIGURATION:\n- Use gpt-4o-mini for all LLM calls (both prediction and judging)\n- Format the state prediction prompt to include:\n  * Last 2 observations\n  * Current action\n  * Request for next state prediction\n  * Request for confidence score (0-100) for each property change\n\n4. DATA COLLECTION PROCEDURE:\nFor each step:\na) Get the current state and action\nb) Prompt LLM for state prediction and confidence scores using format:\n```\nContext:\nPrevious Observation 1: {obs1}\nPrevious Observation 2: {obs2}\nCurrent Action: {action}\n\nTask:\n1. Predict the next observation\n2. For each property that changed, rate your confidence (0-100)\n\nProvide your response in the following format between code blocks (```):\n{\n    \"predicted_observation\": \"string\",\n    \"confidence_scores\": [\n        {\"property\": \"string\", \"change\": \"string\", \"confidence\": number}\n    ]\n}\n```\n\nc) Get actual next state\nd) Use LLM-as-judge to score prediction accuracy:\n- Prompt second LLM to compare predicted vs actual state\n- Score accuracy 0-1 for each property change\n\n5. DATA ANALYSIS:\na) For each episode:\n- Calculate correlation between confidence scores and accuracy\n- Generate accuracy vs confidence scatter plot\nb) Aggregate across episodes:\n- Calculate mean correlation with confidence intervals using bootstrap resampling\n- Generate ROC curves for confidence thresholds\n- Create visualization showing confidence-accuracy relationship\n\n6. LOGGING AND OUTPUT:\n- Log all raw data: states, predictions, confidence scores, accuracy scores\n- Generate summary statistics for each episode\n- Create plots:\n  * Scatter plot of confidence vs accuracy\n  * ROC curves for different confidence thresholds\n  * Box plots of accuracy grouped by confidence ranges\n\n7. EXECUTION FLOW:\na) Run MINI_PILOT first\nb) If successful, run PILOT\nc) Stop after PILOT (do not run FULL_EXPERIMENT)\nd) Report results and statistics for manual review\n\n8. SUCCESS CRITERIA:\n- MINI_PILOT: Clean execution, all components working\n- PILOT: Meaningful correlation patterns between confidence and accuracy\n- Statistical significance in bootstrap resampling tests\n\nPlease implement this experiment with careful error handling and detailed logging at each step. The goal is to validate whether LLM confidence scores meaningfully correlate with prediction accuracy.",
+            "operationalization_codeblocks": [
+                "TextWorldExpress API Example",
+                "Non-parametric Bootstrap Resampling",
+                "Logger/Debugging",
+                "MatPlotLib Line Plot",
+                "LLM example through proxy server"
+            ],
+            "operationalization_cost": 0.093432,
+            "operationalizatoin_time_seconds": 24.779460668563843
+        }
+    },
+    {
+        "research_idea_name": "progressive-state-complexity",
+        "research_idea_long_description": "Investigate whether gradually increasing the complexity of state representations improves LLM simulation accuracy. Start with simple boolean states, then progressively add numerical properties, relationships between objects, and finally full environment dynamics. This could help identify at what level of complexity LLMs begin to struggle with simulation.",
+        "research_idea_short_description": "Study how increasing state representation complexity affects LLM simulation accuracy in text-based games.",
+        "research_idea_hypothesis": "LLMs will show degrading performance as state complexity increases, with particularly sharp drops when moving from discrete to continuous properties and when adding environment dynamics.",
+        "research_idea_variables": "Independent variables: State complexity level (boolean, numerical, relational, dynamic), Game type (CookingWorld, ScienceWorld). Dependent variable: Simulation accuracy. Control: Same LLM model, same number of examples, same prompt structure.",
+        "research_idea_metric": "Accuracy of state predictions at each complexity level, measured using the same metrics as ByteSized32-State-Prediction. Additional analysis of error patterns at each complexity level.",
+        "research_idea_pilot": "Test on a single game type (CookingWorld) with just two complexity levels (boolean-only states vs. full states) to validate the experimental setup.",
+        "research_idea_design_prompt": "Create an experiment comparing LLM simulation accuracy across different state complexity levels. Use TextWorldExpress API to create game environments with progressively more complex states: 1) Boolean-only (isOpen, isOn, etc.), 2) Numerical (temperature, volume), 3) Relational (contains, connects), 4) Full dynamics. For each complexity level, generate 100 state transitions using random valid actions. Use GPT-4 to predict next states. Log all predictions and ground truth in JSON format. Calculate accuracy for each complexity level and property type. Generate histograms showing error distribution across property types. Use bootstrap resampling to compute confidence intervals for performance differences between complexity levels.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Non-parametric Bootstrap Resampling",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [],
+        "research_idea_external_requirements": [],
+        "metadata": {
+            "date_generated": "2024-12-20 15:46:21",
+            "inspiring_paper_ids": [
+                "2406.06485"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "",
+            "cost_for_this_idea": 0.0,
+            "time_seconds_for_this_idea": 0.0,
+            "simplified": false
+        },
+        "id": "unittest-3",
+        "scores": {
+            "score": 1,
+            "num_unknown_components": 0
+        },
+        "rating": "very interesting",
+        "rating_notes": "Unit test -- this one turned up interesting results on a pilot experiment.",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Unit test -- this one turned up interesting results on a pilot experiment.",
+            "operationalization_description": "Please create an experiment to study how increasing state representation complexity affects LLM simulation accuracy in CookingWorld. The experiment should have the following structure:\n\nGLOBAL CONFIGURATION:\n- Create a global variable PILOT_MODE that can be set to 'MINI_PILOT', 'PILOT', or 'FULL_EXPERIMENT'\n- Use gpt-4o-mini for all LLM calls\n- Log all major steps, predictions, and results using the Logger\n\nCOMPLEXITY LEVELS:\nImplement four levels of state complexity in CookingWorld:\n1. Boolean-only: Only track binary states (isOpen, isOn, etc)\n2. Numerical: Add numerical properties (temperature, volume)\n3. Relational: Add object relationships (contains, supports)\n4. Full: Complete state including dynamics\n\nPILOT SETTINGS:\n1. MINI_PILOT:\n   - Use only 2 episodes\n   - Maximum 10 steps per episode\n   - Test only Boolean vs Full complexity\n   - Use training set seeds 1-2\n\n2. PILOT:\n   - Use 10 episodes\n   - Maximum 25 steps per episode\n   - Test all four complexity levels\n   - Use training set seeds 1-5 for training\n   - Use dev set seeds 1-5 for evaluation\n\n3. FULL_EXPERIMENT:\n   - Use 100 episodes\n   - Maximum 50 steps per episode\n   - Test all four complexity levels\n   - Use training set seeds 1-50 for training\n   - Use dev set seeds 1-25 for parameter tuning\n   - Use test set seeds 1-25 for final evaluation\n\nEXPERIMENTAL PROCEDURE:\n1. For each complexity level:\n   - Initialize CookingWorld environment\n   - For each episode:\n     - Reset environment with appropriate seed\n     - Take random actions for specified number of steps\n     - At each step:\n       - Record current state at appropriate complexity level\n       - Take random action\n       - Record next state\n       - Have LLM predict next state\n       - Compare prediction to actual\n     - Log all predictions and ground truth\n\n2. Analysis for each pilot mode:\n   - Calculate accuracy metrics for each complexity level\n   - Use bootstrap resampling to compare performance between levels\n   - Generate plots showing:\n     - Accuracy by complexity level\n     - Error distribution across property types\n   - Save all results to JSON files\n\nOUTPUT:\n1. Generate a results.json file containing:\n   - Accuracy metrics for each complexity level\n   - Statistical comparisons between levels\n   - Error analysis\n\n2. Generate plots:\n   - accuracy_by_complexity.pdf: Line plot showing accuracy across complexity levels\n   - error_distribution.pdf: Distribution of errors by property type\n\n3. Generate a detailed log file with:\n   - All major steps\n   - All predictions and ground truth\n   - Any errors or warnings\n\nIMPORTANT NOTES:\n- Start with MINI_PILOT mode\n- Only proceed to PILOT if MINI_PILOT succeeds\n- Stop after PILOT - do not run FULL_EXPERIMENT (this requires manual verification)\n- Use appropriate error handling and logging throughout\n- Save all intermediate results in case of crashes",
+            "operationalization_codeblocks": [
+                "TextWorldExpress API Example",
+                "Non-parametric Bootstrap Resampling",
+                "Logger/Debugging",
+                "MatPlotLib Line Plot",
+                "LLM example through proxy server"
+            ],
+            "operationalization_cost": 0.09243,
+            "operationalizatoin_time_seconds": 22.756360054016113
+        }
+    }
+]

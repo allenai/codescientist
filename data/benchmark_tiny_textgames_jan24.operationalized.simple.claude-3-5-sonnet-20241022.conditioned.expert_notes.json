@@ -1,0 +1,422 @@
+[
+    {
+        "research_idea_name": "llm-graph-verification",
+        "research_idea_long_description": "Study whether using LLMs to verify and correct knowledge graph triples improves graph accuracy in text-based games. Compare different verification strategies and their impact on graph quality and agent performance.",
+        "research_idea_short_description": "Evaluate if LLM-based verification improves knowledge graph accuracy in text-based games.",
+        "research_idea_hypothesis": "LLM-based verification of knowledge graph triples will improve graph accuracy and consistency compared to unverified graphs.",
+        "research_idea_variables": "Independent variables: Verification method (no verification, LLM verification, rule-based verification). Dependent variables: Graph accuracy, consistency, game performance. Control variables: Game environment, episode length, random seeds.",
+        "research_idea_metric": "Graph-level and token-level F1 scores vs ground truth, number of inconsistencies detected and corrected, game score.",
+        "research_idea_pilot": "Test on one TextWorldExpress game with 3 episodes, comparing graph quality with and without LLM verification.",
+        "research_idea_design_prompt": "Create a system that uses LLMs to verify knowledge graph triples. For each state: (1) Generate initial graph, (2) Use LLM to verify each triple, (3) Correct/update graph based on LLM feedback, (4) Save verified graph. Run on CookingWorld, 3 episodes, 30 steps each. Log all graphs and verification results. Compare performance using bootstrap resampling. Generate plots showing accuracy improvements. Final report should include: statistical analysis, graph visualizations, and verification impact metrics.",
+        "research_idea_codeblocks": [
+            "LLM example through proxy server",
+            "DOT Graphviz Graph",
+            "TextWorldExpress API Example",
+            "Logger/Debugging",
+            "Non-parametric Bootstrap Resampling",
+            "MatPlotLib Line Plot"
+        ],
+        "research_idea_required_code_and_resources": [],
+        "research_idea_external_requirements": [],
+        "metadata": {
+            "date_generated": "2024-12-20 15:55:57",
+            "inspiring_paper_ids": [
+                "2106.09578"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "",
+            "cost_for_this_idea": 0.0,
+            "time_seconds_for_this_idea": 0.0,
+            "simplified": false
+        },
+        "id": "unittest-1",
+        "scores": {
+            "score": 1,
+            "num_unknown_components": 0
+        },
+        "rating": "very interesting",
+        "rating_notes": "Unit test -- this one turned up interesting results on a pilot experiment.",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Unit test -- this one turned up interesting results on a pilot experiment.",
+            "operationalization_description": "Please implement an experiment to evaluate whether LLM-based verification improves knowledge graph accuracy in text-based games. The experiment should be implemented with three pilot modes (controlled by a global PILOT_MODE variable):\n\nPILOT MODES:\n- MINI_PILOT: 2 episodes, 10 steps each, training set seeds 1-2\n- PILOT: 25 episodes, 30 steps each, training set seeds 1-10\n- FULL_EXPERIMENT: 100 episodes, 50 steps each (training/dev/test split)\n\nPlease implement and run only MINI_PILOT first, then if successful, run PILOT. Stop before FULL_EXPERIMENT.\n\nENVIRONMENT SETUP:\n1. Use CookingWorld from TextWorldExpress\n2. Environment parameters: numLocations=3, numIngredients=2, numDistractorItems=2, includeDoors=0\n\nCONDITIONS:\n1. Baseline: Generate knowledge graph triples without verification\n2. Experimental: Generate knowledge graph triples with LLM verification using gpt-4o-mini\n\nKNOWLEDGE GRAPH GENERATION:\n1. For each game state:\n   - Extract entities and relationships from game text\n   - Generate initial knowledge graph triples\n   - Save as DOT format\n2. For experimental condition, also:\n   - For each triple, use gpt-4o-mini to verify correctness\n   - Prompt template for verification:\n     \"Given the game state description: '{state_desc}'\nIs the following knowledge graph triple correct? '{triple}'\nRespond in JSON format with keys 'is_correct' (boolean) and 'correction' (string, only if is_correct is false).\"\n   - Update graph based on LLM feedback\n   - Save verified graph\n\nMETRICS TO TRACK:\n1. Graph-level metrics:\n   - Number of nodes/edges\n   - Number of inconsistencies detected\n   - Number of corrections made\n2. Game performance metrics:\n   - Score per episode\n   - Steps to completion\n\nANALYSIS:\n1. Use bootstrap resampling to compare:\n   - Graph metrics between conditions\n   - Game performance between conditions\n2. Generate plots:\n   - Line plot of graph size over time\n   - Line plot of corrections over time\n   - Line plot of game score over time\n\nLOGGING:\n1. Log all game states, actions, and observations\n2. Log all graph states (before/after verification)\n3. Log all LLM verification results\n4. Log all performance metrics\n\nOUTPUT:\n1. Save all graphs as DOT files and PDF visualizations\n2. Generate summary statistics for both conditions\n3. Generate statistical comparison results\n4. Save all plots as PDFs\n\nPlease implement this experiment using the provided codeblocks. Start with MINI_PILOT mode, and if successful, proceed to PILOT mode. Stop before FULL_EXPERIMENT mode.",
+            "operationalization_codeblocks": [
+                "LLM example through proxy server",
+                "DOT Graphviz Graph",
+                "TextWorldExpress API Example",
+                "Logger/Debugging",
+                "Non-parametric Bootstrap Resampling",
+                "MatPlotLib Line Plot"
+            ],
+            "operationalization_cost": 0.095694,
+            "operationalizatoin_time_seconds": 22.563843965530396
+        }
+    },
+    {
+        "research_idea_name": "simulation-confidence-analysis",
+        "research_idea_long_description": "Study whether LLMs can accurately assess their confidence in state predictions, and whether this confidence correlates with actual accuracy. This could enable more reliable simulation by identifying when predictions are likely to be incorrect.",
+        "research_idea_short_description": "Investigate LLM ability to assess confidence in state predictions and correlation with accuracy.",
+        "research_idea_hypothesis": "LLM confidence scores will correlate with prediction accuracy, allowing for identification of potentially incorrect predictions.",
+        "research_idea_variables": "Independent variables: State complexity, Game type, Property type. Dependent variables: Prediction accuracy, Confidence score. Control: Same LLM, same states, same examples.",
+        "research_idea_metric": "Correlation between confidence scores and accuracy. Precision/recall for identifying incorrect predictions using confidence thresholds.",
+        "research_idea_pilot": "Test on simple CookingWorld scenarios, focusing on boolean property predictions with confidence scores.",
+        "research_idea_design_prompt": "Create an experiment to analyze LLM confidence in state predictions. Use TextWorldExpress to generate 200 state transitions. For each prediction, prompt GPT-4 to provide both the predicted state and a confidence score (0-100) for each property change. Log all predictions, confidence scores, and ground truth. Calculate correlation between confidence and accuracy. Generate ROC curves for using confidence to predict correctness. Use bootstrap resampling to compute confidence intervals. Create visualizations showing relationship between confidence and accuracy across different property types.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Non-parametric Bootstrap Resampling",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [],
+        "research_idea_external_requirements": [],
+        "metadata": {
+            "date_generated": "2024-12-20 15:46:21",
+            "inspiring_paper_ids": [
+                "2406.06485"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "",
+            "cost_for_this_idea": 0.0,
+            "time_seconds_for_this_idea": 0.0,
+            "simplified": false
+        },
+        "id": "unittest-2",
+        "scores": {
+            "score": 1,
+            "num_unknown_components": 0
+        },
+        "rating": "very interesting",
+        "rating_notes": "Unit test -- this one turned up interesting results on a pilot experiment. Measuring prediction accuracy could be done using LLM-as-a-judge (e.g. have the model predict the observation, then have another LLM compare this generated observation to the gold observation, counting (perhaps by sentence, or by item) the number of things that are the same, and the number that are different, arriving at a score between 0-1 for each state prediction.  Similarly, do to the task well, the LLM doing the state prediction task should probably have at least the last 2-3 observations/actions in its prompt, to provide some context.",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Unit test -- this one turned up interesting results on a pilot experiment. Measuring prediction accuracy could be done using LLM-as-a-judge (e.g. have the model predict the observation, then have another LLM compare this generated observation to the gold observation, counting (perhaps by sentence, or by item) the number of things that are the same, and the number that are different, arriving at a score between 0-1 for each state prediction.  Similarly, do to the task well, the LLM doing the state prediction task should probably have at least the last 2-3 observations/actions in its prompt, to provide some context.",
+            "operationalization_description": "Please create an experiment to analyze LLM confidence in state predictions in TextWorldExpress, implementing the following specifications:\n\n1. EXPERIMENT MODES AND SCOPE:\nImplement a global variable PILOT_MODE that can be set to one of: 'MINI_PILOT', 'PILOT', or 'FULL_EXPERIMENT'. Configure the following settings for each mode:\n- MINI_PILOT: Use 3 episodes of CookingWorld, 10 steps each, from training set\n- PILOT: Use 25 episodes of CookingWorld, 25 steps each, from training set\n- FULL_EXPERIMENT: Use 200 episodes, 50 steps each, balanced across train/dev/test sets\n\n2. ENVIRONMENT SETUP:\n- Use TextWorldExpress API to generate CookingWorld scenarios\n- Configure simple environments: 3 rooms, no doors, 2 ingredients, 2 distractor items\n- For each step, record: current state, action taken, next state\n\n3. LLM CONFIGURATION:\n- Use gpt-4o-mini for all LLM calls (both prediction and judging)\n- Format the state prediction prompt to include:\n  * Last 2 observations\n  * Current action\n  * Request for next state prediction\n  * Request for confidence score (0-100) for each property change\n\n4. DATA COLLECTION PROCEDURE:\nFor each step:\na) Get the current state and action\nb) Prompt LLM for state prediction and confidence scores using format:\n```\nContext:\nPrevious Observation 1: {obs1}\nPrevious Observation 2: {obs2}\nCurrent Action: {action}\n\nTask:\n1. Predict the next observation\n2. For each property that changed, rate your confidence (0-100)\n\nProvide your response in the following format between code blocks (```):\n{\n    \"predicted_observation\": \"string\",\n    \"confidence_scores\": [\n        {\"property\": \"string\", \"change\": \"string\", \"confidence\": number}\n    ]\n}\n```\n\nc) Get actual next state\nd) Use LLM-as-judge to score prediction accuracy:\n- Prompt second LLM to compare predicted vs actual state\n- Score accuracy 0-1 for each property change\n\n5. DATA ANALYSIS:\na) For each episode:\n- Calculate correlation between confidence scores and accuracy\n- Generate accuracy vs confidence scatter plot\nb) Aggregate across episodes:\n- Calculate mean correlation with confidence intervals using bootstrap resampling\n- Generate ROC curves for confidence thresholds\n- Create visualization showing confidence-accuracy relationship\n\n6. LOGGING AND OUTPUT:\n- Log all raw data: states, predictions, confidence scores, accuracy scores\n- Generate summary statistics for each episode\n- Create plots:\n  * Scatter plot of confidence vs accuracy\n  * ROC curves for different confidence thresholds\n  * Box plots of accuracy grouped by confidence ranges\n\n7. EXECUTION FLOW:\na) Run MINI_PILOT first\nb) If successful, run PILOT\nc) Stop after PILOT (do not run FULL_EXPERIMENT)\nd) Report results and statistics for manual review\n\n8. SUCCESS CRITERIA:\n- MINI_PILOT: Clean execution, all components working\n- PILOT: Meaningful correlation patterns between confidence and accuracy\n- Statistical significance in bootstrap resampling tests\n\nPlease implement this experiment with careful error handling and detailed logging at each step. The goal is to validate whether LLM confidence scores meaningfully correlate with prediction accuracy.",
+            "operationalization_codeblocks": [
+                "TextWorldExpress API Example",
+                "Non-parametric Bootstrap Resampling",
+                "Logger/Debugging",
+                "MatPlotLib Line Plot",
+                "LLM example through proxy server"
+            ],
+            "operationalization_cost": 0.093432,
+            "operationalizatoin_time_seconds": 24.779460668563843
+        }
+    },
+    {
+        "research_idea_name": "progressive-state-complexity",
+        "research_idea_long_description": "Investigate whether gradually increasing the complexity of state representations improves LLM simulation accuracy. Start with simple boolean states, then progressively add numerical properties, relationships between objects, and finally full environment dynamics. This could help identify at what level of complexity LLMs begin to struggle with simulation.",
+        "research_idea_short_description": "Study how increasing state representation complexity affects LLM simulation accuracy in text-based games.",
+        "research_idea_hypothesis": "LLMs will show degrading performance as state complexity increases, with particularly sharp drops when moving from discrete to continuous properties and when adding environment dynamics.",
+        "research_idea_variables": "Independent variables: State complexity level (boolean, numerical, relational, dynamic), Game type (CookingWorld, ScienceWorld). Dependent variable: Simulation accuracy. Control: Same LLM model, same number of examples, same prompt structure.",
+        "research_idea_metric": "Accuracy of state predictions at each complexity level, measured using the same metrics as ByteSized32-State-Prediction. Additional analysis of error patterns at each complexity level.",
+        "research_idea_pilot": "Test on a single game type (CookingWorld) with just two complexity levels (boolean-only states vs. full states) to validate the experimental setup.",
+        "research_idea_design_prompt": "Create an experiment comparing LLM simulation accuracy across different state complexity levels. Use TextWorldExpress API to create game environments with progressively more complex states: 1) Boolean-only (isOpen, isOn, etc.), 2) Numerical (temperature, volume), 3) Relational (contains, connects), 4) Full dynamics. For each complexity level, generate 100 state transitions using random valid actions. Use GPT-4 to predict next states. Log all predictions and ground truth in JSON format. Calculate accuracy for each complexity level and property type. Generate histograms showing error distribution across property types. Use bootstrap resampling to compute confidence intervals for performance differences between complexity levels.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Non-parametric Bootstrap Resampling",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [],
+        "research_idea_external_requirements": [],
+        "metadata": {
+            "date_generated": "2024-12-20 15:46:21",
+            "inspiring_paper_ids": [
+                "2406.06485"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "",
+            "cost_for_this_idea": 0.0,
+            "time_seconds_for_this_idea": 0.0,
+            "simplified": false
+        },
+        "id": "unittest-3",
+        "scores": {
+            "score": 1,
+            "num_unknown_components": 0
+        },
+        "rating": "very interesting",
+        "rating_notes": "Unit test -- this one turned up interesting results on a pilot experiment.",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Unit test -- this one turned up interesting results on a pilot experiment.",
+            "operationalization_description": "Please create an experiment to study how increasing state representation complexity affects LLM simulation accuracy in CookingWorld. The experiment should have the following structure:\n\nGLOBAL CONFIGURATION:\n- Create a global variable PILOT_MODE that can be set to 'MINI_PILOT', 'PILOT', or 'FULL_EXPERIMENT'\n- Use gpt-4o-mini for all LLM calls\n- Log all major steps, predictions, and results using the Logger\n\nCOMPLEXITY LEVELS:\nImplement four levels of state complexity in CookingWorld:\n1. Boolean-only: Only track binary states (isOpen, isOn, etc)\n2. Numerical: Add numerical properties (temperature, volume)\n3. Relational: Add object relationships (contains, supports)\n4. Full: Complete state including dynamics\n\nPILOT SETTINGS:\n1. MINI_PILOT:\n   - Use only 2 episodes\n   - Maximum 10 steps per episode\n   - Test only Boolean vs Full complexity\n   - Use training set seeds 1-2\n\n2. PILOT:\n   - Use 25 episodes\n   - Maximum 25 steps per episode\n   - Test all four complexity levels\n   - Use training set seeds 1-5 for training\n   - Use dev set seeds 1-5 for evaluation\n\n3. FULL_EXPERIMENT:\n   - Use 100 episodes\n   - Maximum 50 steps per episode\n   - Test all four complexity levels\n   - Use training set seeds 1-50 for training\n   - Use dev set seeds 1-25 for parameter tuning\n   - Use test set seeds 1-25 for final evaluation\n\nEXPERIMENTAL PROCEDURE:\n1. For each complexity level:\n   - Initialize CookingWorld environment\n   - For each episode:\n     - Reset environment with appropriate seed\n     - Take random actions for specified number of steps\n     - At each step:\n       - Record current state at appropriate complexity level\n       - Take random action\n       - Record next state\n       - Have LLM predict next state\n       - Compare prediction to actual\n     - Log all predictions and ground truth\n\n2. Analysis for each pilot mode:\n   - Calculate accuracy metrics for each complexity level\n   - Use bootstrap resampling to compare performance between levels\n   - Generate plots showing:\n     - Accuracy by complexity level\n     - Error distribution across property types\n   - Save all results to JSON files\n\nOUTPUT:\n1. Generate a results.json file containing:\n   - Accuracy metrics for each complexity level\n   - Statistical comparisons between levels\n   - Error analysis\n\n2. Generate plots:\n   - accuracy_by_complexity.pdf: Line plot showing accuracy across complexity levels\n   - error_distribution.pdf: Distribution of errors by property type\n\n3. Generate a detailed log file with:\n   - All major steps\n   - All predictions and ground truth\n   - Any errors or warnings\n\nIMPORTANT NOTES:\n- Start with MINI_PILOT mode\n- Only proceed to PILOT if MINI_PILOT succeeds\n- Stop after PILOT - do not run FULL_EXPERIMENT (this requires manual verification)\n- Use appropriate error handling and logging throughout\n- Save all intermediate results in case of crashes",
+            "operationalization_codeblocks": [
+                "TextWorldExpress API Example",
+                "Non-parametric Bootstrap Resampling",
+                "Logger/Debugging",
+                "MatPlotLib Line Plot",
+                "LLM example through proxy server"
+            ],
+            "operationalization_cost": 0.09243,
+            "operationalizatoin_time_seconds": 22.756360054016113
+        }
+    },
+    {
+        "research_idea_name": "kg-failure-detection",
+        "research_idea_long_description": "Develop and evaluate a knowledge-graph-based approach for detecting action failures in TextWorldExpress CookingWorld. The agent maintains a simple knowledge graph of observed game state, and uses graph-based features (node/edge changes, graph density, path lengths) to detect when actions have failed, enabling faster and more reliable failure detection compared to text-based methods.",
+        "research_idea_short_description": "Using knowledge graph features to detect action failures in text-based games",
+        "research_idea_hypothesis": "An agent using knowledge graph features can detect action failures more accurately and quickly compared to agents using only text-based observation features.",
+        "research_idea_variables": "Independent variables: (1) Failure detection method (KG-based vs text-based). Dependent variables: (1) Failure detection accuracy, (2) Detection speed (steps until detection). Control variables: Environment configuration, action space, failure types.",
+        "research_idea_metric": "Primary metrics: (1) Failure detection accuracy (precision/recall/F1), (2) Average steps to detection. Secondary metrics: (1) False positive rate, (2) Task completion rate with/without detection.",
+        "research_baselines": "1. Text similarity baseline (cosine similarity between expected vs observed text), 2. Simple keyword matching baseline (checking for failure keywords)",
+        "research_idea_pilot": "Test on TextWorldExpress CookingWorld with 1 room, focusing only on cooking-related failures (burning food, incorrect recipe steps). Start with 50 episodes with controlled failure injection.",
+        "research_idea_design_prompt": "Create a simple agent that builds and maintains a knowledge graph of the game state in TextWorldExpress CookingWorld. The graph should represent objects and their relationships (e.g., 'knife is in kitchen', 'apple is sliced'). Store graphs in DOT format.\n\nImplement three failure detectors:\n1. KG-based: Extract features from the graph after each action (node count changes, edge changes, graph density, shortest paths between key objects)\n2. Text similarity baseline: Compare current observation text with expected observation using cosine similarity\n3. Keyword baseline: Check for failure-related keywords\n\nTest in a single-room CookingWorld environment. For each episode:\n1. Randomly inject 1-2 failures (burning food, wrong recipe steps)\n2. Record when each detector identifies the failure\n3. Save the knowledge graph state and detection results\n\nRun 50 episodes. Generate a report comparing detector performance (accuracy, speed) with statistical significance testing. Include example visualizations of knowledge graphs before/after failures.",
+        "research_idea_codeblocks": [
+            "DOT Graphviz Graph",
+            "TextWorldExpress API Example",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "Non-parametric Bootstrap Resampling"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorldExpress Environment",
+                "description": "TextWorldExpress with CookingWorld game (single room configuration)",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "KG Builder",
+                "description": "Simple system for building/updating knowledge graph from game observations",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Graph Visualization",
+                "description": "DOT/Graphviz visualization of knowledge graphs",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "KG Feature Extractor",
+                "description": "Module for computing basic graph features (density, paths, changes)",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Text Similarity Baseline",
+                "description": "Simple cosine similarity calculator for text observations",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Keyword Baseline",
+                "description": "Simple keyword matching system for failure detection",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Logging System",
+                "description": "System for logging actions and detection results",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Plotting Tools",
+                "description": "Tools for plotting detection performance metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Statistical Analysis",
+                "description": "Tools for comparing detector performance",
+                "where": "existing codeblock",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "numpy (for numerical operations)",
+            "scipy (for statistical tests)",
+            "matplotlib (for plotting)",
+            "scikit-learn (for text similarity calculations)",
+            "graphviz (for graph visualization)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-01-23 15:42:14",
+            "inspiring_paper_ids": [
+                "2001.08837",
+                "2305.17390"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1945,
+            "time_seconds_for_this_idea": 36.2155,
+            "simplified": true
+        },
+        "id": "idea-510-simplified",
+        "scores": {
+            "score": 18,
+            "num_unknown_components": 0
+        },
+        "rating": "could work",
+        "rating_notes": "Might work?  Task completion is rare, so should use task score (and task score increasing, or task failure) as a signal.  Assuming that the task failure information has to be kept across training runs, to be useful? (but should be frozen for eval runs?)",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Might work?  Task completion is rare, so should use task score (and task score increasing, or task failure) as a signal.  Assuming that the task failure information has to be kept across training runs, to be useful? (but should be frozen for eval runs?)",
+            "operationalization_description": "Please implement a knowledge-graph-based failure detection system for TextWorldExpress CookingWorld, with the following specifications:\n\n1. PILOT MODE SETTINGS:\nCreate a global variable PILOT_MODE that can be set to one of:\n- MINI_PILOT: 3 episodes, max 15 steps each, training set seeds 1-3\n- PILOT: 25 episodes, max 30 steps each, training set seeds 1-15 for training, dev set seeds 1-10 for evaluation\n- FULL_EXPERIMENT: 200 episodes, max 50 steps each, proper train/dev/test split\nImplement the experiment to first run MINI_PILOT, then if successful, run PILOT. Stop before FULL_EXPERIMENT.\n\n2. ENVIRONMENT SETUP:\n- Use TextWorldExpress CookingWorld with 1 room configuration\n- Set parameters: numLocations=1, numIngredients=2, numDistractorItems=2, includeDoors=0\n- Use gpt-4o-mini for any LLM calls\n\n3. IMPLEMENT THREE FAILURE DETECTORS:\na) KG-Based Detector:\n- Create knowledge graph after each action using DOT format\n- Nodes: objects, locations, states\n- Edges: relationships (in, on, contains, state)\n- Extract features: node count delta, edge count delta, graph density\n- Store each graph state as separate DOT file for visualization\n\nb) Text Similarity Baseline:\n- Compare current observation with previous using cosine similarity\n- Flag significant similarity drops as potential failures\n\nc) Keyword Baseline:\n- Check for failure keywords: 'burn', 'wrong', 'cannot', 'failed'\n\n4. DATA COLLECTION (per episode):\n- Store initial knowledge graph\n- For each step:\n  * Store observation, action, score\n  * Store updated knowledge graph\n  * Store detection results from all three detectors\n  * Store ground truth (was this actually a failure step?)\n  * Store task score\n\n5. EVALUATION:\n- Primary metrics:\n  * Failure detection accuracy (precision/recall/F1)\n  * Average steps to detection\n- Secondary metrics:\n  * False positive rate\n  * Task score progression\n\n6. VISUALIZATION:\n- Create line plots comparing detector performance\n- Save knowledge graphs before/after detected failures\n- Generate PDF visualizations of key graph states\n\n7. STATISTICAL ANALYSIS:\n- Use bootstrap resampling to compare detector performance\n- Report p-values for performance differences\n\n8. LOGGING:\n- Use the logger to track all major events\n- Log experiment configuration\n- Log all detection events\n- Log performance metrics\n\nOutput Requirements:\n1. A 'results.json' file containing all metrics\n2. A 'log.json' file with detailed execution logs\n3. A 'graphs/' directory containing DOT and PDF visualizations\n4. A 'plots/' directory containing performance plots\n5. A 'report.txt' with statistical analysis results\n\nPlease implement this experiment starting with MINI_PILOT mode. After successful completion, run PILOT mode. Stop before FULL_EXPERIMENT mode.\n\nNote: Use task score progression and task failure as signals for failure detection ground truth, as suggested in the expert notes.",
+            "operationalization_codeblocks": [
+                "DOT Graphviz Graph",
+                "TextWorldExpress API Example",
+                "Logger/Debugging",
+                "MatPlotLib Line Plot",
+                "Non-parametric Bootstrap Resampling"
+            ],
+            "operationalization_cost": 0.09214800000000001,
+            "operationalizatoin_time_seconds": 22.65683364868164
+        }
+    },
+    {
+        "research_idea_name": "two-level-discovery-agent",
+        "research_idea_long_description": "Create a simplified two-level hierarchical agent for scientific discovery tasks, with a high-level planner for experimental design and a low-level executor for action implementation. Focus specifically on measurement tasks in DiscoveryWorld that require planning a sequence of measurements and executing them accurately.",
+        "research_idea_short_description": "Two-level hierarchical agent that separates planning and execution for scientific measurement tasks.",
+        "research_idea_hypothesis": "A two-level hierarchical agent that separates planning from execution will perform better on measurement-based discovery tasks than a non-hierarchical baseline.",
+        "research_idea_variables": "Independent variables: Agent architecture (hierarchical vs flat), measurement task complexity. Dependent variables: Task completion rate, measurement accuracy, action efficiency. Control variables: Environment parameters, available steps, LLM model.",
+        "research_idea_metric": "Primary metrics: (1) Task completion rate (boolean success/failure), (2) Measurement accuracy (compared to ground truth), (3) Number of actions required. Secondary: Plan quality assessment via LLM evaluation.",
+        "research_baselines": "Compare against: (1) Standard ReAct baseline, (2) Flat (non-hierarchical) version of the agent",
+        "research_idea_pilot": "Test on three simple DiscoveryWorld measurement tasks (e.g., measuring rocket fuel efficiency) with clear planning/execution phases.",
+        "research_idea_design_prompt": "Create a two-level scientific discovery agent:\n1. Implement high-level planner:\n   - Use LLM to generate measurement plan\n   - List required measurements in order\n   - Specify success criteria for each measurement\n2. Implement low-level executor:\n   - Convert measurement goals to actions\n   - Execute measurement sequences\n   - Report results to planner\n3. Test on measurement tasks:\n   - Select 3 DiscoveryWorld tasks focused on measurement\n   - Log plans and execution steps\n   - Record success/failure and accuracy\n4. Evaluation process:\n   - Run 30 episodes per task\n   - Compare against baselines\n   - Use bootstrap resampling for statistical analysis\n5. Generate analysis:\n   - Calculate success rates\n   - Measure accuracy of measurements\n   - Compare action efficiency\n6. Document results:\n   - Create performance tables\n   - Generate example episodes",
+        "research_idea_codeblocks": [
+            "ReAct Agent Example",
+            "LLM example through proxy server",
+            "Logger/Debugging",
+            "DiscoveryWorld API Example",
+            "Bootstrap resampling",
+            "DiscoveryWorld Knowledge Scorer Script"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "Two-level agent",
+                "description": "Simple two-level agent architecture (planner + executor)",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "DiscoveryWorld API",
+                "description": "The DiscoveryWorld environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ReAct baseline",
+                "description": "Standard ReAct baseline agent",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface to GPT-4",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Logger",
+                "description": "Logging functionality",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Bootstrap analysis",
+                "description": "Statistical analysis",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Measurement planner",
+                "description": "High-level module for planning measurements",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Action executor",
+                "description": "Low-level module for executing measurement actions",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "numpy (for numerical operations)",
+            "pandas (for data analysis)",
+            "json (for data storage)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-01-23 15:58:44",
+            "inspiring_paper_ids": [
+                "2305.17390",
+                "2406.06769"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1609,
+            "time_seconds_for_this_idea": 34.0873,
+            "simplified": true
+        },
+        "id": "idea-662-simplified",
+        "scores": {
+            "score": 17,
+            "num_unknown_components": 0
+        },
+        "rating": "could work",
+        "rating_notes": "Makes sense. Task performance should be measured with the partial Task Score rather than Task Success/Completion, since task completion is rare for agents on this environment.  If using DiscoveryWorld, should use the 'easy' versions of the Proteomics and Reactor Lab scenarios, they might work for this.",
+        "operationalization": {
+            "success": true,
+            "operationalization_method": "simple",
+            "operationalization_model": "claude-3-5-sonnet-20241022",
+            "operationalization_extra_conditioning_text": "Please use `gpt-4o-mini` for all LLM calls, because it's fast and inexpensive.",
+            "operationalization_include_expert_notes": true,
+            "operationalization_expert_notes": "Makes sense. Task performance should be measured with the partial Task Score rather than Task Success/Completion, since task completion is rare for agents on this environment.  If using DiscoveryWorld, should use the 'easy' versions of the Proteomics and Reactor Lab scenarios, they might work for this.",
+            "operationalization_description": "Please implement a pilot experiment comparing a two-level hierarchical agent against baselines on DiscoveryWorld measurement tasks. The experiment should support three modes (PILOT_MODE): 'MINI_PILOT', 'PILOT', and 'FULL_EXPERIMENT'. Start with MINI_PILOT.\n\nEnvironment Setup:\n1. Use DiscoveryWorld API with two scenarios:\n   - Proteomics (Easy difficulty)\n   - Reactor Lab (Easy difficulty)\n\nAgent Implementations:\n1. Implement hierarchical agent (experimental condition):\n   a. High-level planner:\n      - Use gpt-4o-mini for planning\n      - Input: Task description, current state\n      - Output: JSON with ordered list of measurement goals\n      - Format: {\"measurement_plan\": [{\"step\": 1, \"goal\": \"...\", \"success_criteria\": \"...\"}]}\n   b. Low-level executor:\n      - Use gpt-4o-mini for execution\n      - Input: Current measurement goal, observation\n      - Output: Specific action to take\n      - Must handle basic error recovery\n\n2. Implement baselines:\n   a. Standard ReAct agent (using existing codeblock)\n   b. Flat agent (single-level version of experimental agent)\n\nExperimental Parameters by Mode:\n1. MINI_PILOT:\n   - 2 episodes per scenario\n   - Maximum 20 steps per episode\n   - Seeds: [1, 2]\n\n2. PILOT:\n   - 25 episodes per scenario\n   - Maximum 50 steps per episode\n   - Seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n3. FULL_EXPERIMENT (not to be run until pilot results verified):\n   - 30 episodes per scenario\n   - Maximum 100 steps per episode\n   - Seeds: [1-30]\n\nMetrics to Track:\n1. Primary:\n   - Task Score (normalized, from DiscoveryWorld API)\n   - Number of actions taken per episode\n   - Plan quality score (LLM evaluation of measurement plans)\n\n2. Secondary:\n   - Success rate of individual measurements\n   - Time taken per episode\n   - Number of error recoveries needed\n\nLogging Requirements:\n1. Each episode should log:\n   - Full trajectory (observations, actions, scores)\n   - Generated measurement plans\n   - Individual measurement success/failure\n   - Error recovery attempts\n\n2. Summary statistics:\n   - Mean and std dev of all metrics\n   - Bootstrap resampling analysis comparing conditions\n\nAnalysis Steps:\n1. For each pilot mode:\n   a. Calculate mean task scores and action counts\n   b. Perform bootstrap resampling to compare conditions\n   c. Generate summary tables of results\n   d. Save example episodes showing agent behavior\n\n2. Required plots:\n   a. Box plots of task scores by condition\n   b. Learning curves (score vs episode)\n   c. Action efficiency comparison\n\nOutput Requirements:\n1. Save all results to JSON files with clear naming:\n   - {mode}_{scenario}_{agent_type}_{seed}.json\n   - {mode}_summary_stats.json\n   - {mode}_bootstrap_analysis.json\n\n2. Generate a brief report for each pilot mode with:\n   - Key statistics\n   - Example episodes\n   - Preliminary conclusions\n\nIMPORTANT NOTES:\n1. Use gpt-4o-mini for all LLM calls\n2. Start with MINI_PILOT mode\n3. Stop after PILOT mode for human verification\n4. Log all errors and debugging info\n5. Save checkpoints after each episode\n\nSuccess Criteria for Advancing:\n1. MINI_PILOT to PILOT:\n   - All components functional\n   - No runtime errors\n   - Basic metrics being logged\n\n2. PILOT to FULL_EXPERIMENT:\n   - Clear performance differences visible\n   - No memory leaks or scaling issues\n   - All metrics and analyses working\n\nPlease implement this experiment with careful error handling and detailed logging throughout.",
+            "operationalization_codeblocks": [
+                "ReAct Agent Example",
+                "LLM example through proxy server",
+                "Logger/Debugging",
+                "DiscoveryWorld API Example",
+                "Non-parametric Bootstrap Resampling",
+                "DiscoveryWorld Knowledge Scorer Script"
+            ],
+            "operationalization_cost": 0.120627,
+            "operationalizatoin_time_seconds": 25.709311962127686
+        }
+    }
+]

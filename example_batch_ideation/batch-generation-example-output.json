@@ -1,0 +1,1558 @@
+[
+    {
+        "research_idea_name": "evolving-knowledge-graphs",
+        "research_idea_long_description": "Investigate how dynamically evolving knowledge graphs can improve agent performance in text-based games. Rather than using a static knowledge graph or building one from scratch, combine both approaches by starting with a minimal commonsense knowledge graph that evolves based on agent experiences. This tests whether selective knowledge graph growth leads to better performance than either static or purely dynamic approaches.",
+        "research_idea_short_description": "Study effectiveness of combining static and dynamic knowledge graphs for text-based game agents.",
+        "research_idea_hypothesis": "An agent using a hybrid knowledge graph (starting with minimal commonsense knowledge and growing through experience) will perform better than agents using either purely static or purely dynamic knowledge graphs.",
+        "research_idea_variables": "Independent variables: Knowledge graph type (static, dynamic, hybrid). Control variables: Environment parameters, training episodes, model architecture. Dependent variables: Task completion score, steps to completion, knowledge graph size/complexity.",
+        "research_idea_metric": "Primary: Average reward per episode. Secondary: Steps to completion, knowledge graph growth rate, percentage of useful vs. unused knowledge graph nodes (measured by node utilization in successful episodes).",
+        "research_baselines": "1. Static knowledge graph agent (using full ConceptNet subgraph), 2. Dynamic knowledge graph agent (building from scratch), 3. Simple agent without knowledge graph",
+        "research_idea_pilot": "Test on TextWorld kitchen environment with 2 rooms and 5 objects, running 10 episodes with 20 steps each. Compare three agents on same seeds.",
+        "research_idea_design_prompt": "Create three agents for TextWorld kitchen environment: (1) Static KG agent using ConceptNet, (2) Dynamic KG agent building graph from observations, (3) Hybrid agent starting with minimal ConceptNet graph (only direct object relations) that grows during exploration. Use DOT format for graphs, save at each step. Use GPT2-medium as base model. For each agent: Initialize environment with 2 rooms, 5 objects. Run 10 episodes, 20 steps each. Log full trajectories (observation, action, reward, graph state). Convert graphs to PDF after each episode, highlighting new nodes in red. Calculate metrics: reward per episode, steps to completion, graph size, node utilization (count of nodes used in successful action sequences). Use bootstrap resampling to compare performance distributions.",
+        "research_idea_codeblocks": [
+            "DOT Graphviz Graph",
+            "TextWorldExpress API Example",
+            "ConceptNet Knowledge Base",
+            "Non-parametric Bootstrap Resampling",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld Environment",
+                "description": "TextWorld kitchen environment with configurable rooms/objects",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ConceptNet Interface",
+                "description": "Interface to ConceptNet knowledge base",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT2-medium model",
+                "description": "Base language model for agents",
+                "where": "external",
+                "effort": "minor"
+            },
+            {
+                "name": "Graph Generation",
+                "description": "DOT/Graphviz graph generation and visualization",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Static KG Agent",
+                "description": "Agent using static ConceptNet knowledge",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Dynamic KG Agent",
+                "description": "Agent building knowledge graph from scratch",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Hybrid KG Agent",
+                "description": "Agent combining static and dynamic knowledge graphs",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Bootstrap Analysis",
+                "description": "Statistical comparison of agent performances",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM Interface",
+                "description": "Interface for GPT2 model interactions",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Logging System",
+                "description": "System for logging trajectories and metrics",
+                "where": "build",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "matplotlib (for graph visualization)",
+            "transformers (for GPT2 model)",
+            "torch (for GPT2 model)",
+            "tqdm (for progress bars)",
+            "graphviz (for DOT visualization)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:36",
+            "inspiring_paper_ids": [
+                "2005.00811",
+                "2311.18232"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1771,
+            "time_seconds_for_this_idea": 34.1296
+        },
+        "id": "idea-1"
+    },
+    {
+        "research_idea_name": "memory-guided-exploration",
+        "research_idea_long_description": "Develop an agent that uses episodic memory to guide exploration in text-based games. The agent maintains two memory systems: a short-term memory of the current episode and a long-term memory of successful trajectories from previous episodes. The agent uses these memories to balance between exploring new areas and exploiting known successful paths.",
+        "research_idea_short_description": "Investigate dual-memory system for balancing exploration and exploitation in text-based games.",
+        "research_idea_hypothesis": "An agent with separate short-term and long-term memory systems will achieve better exploration-exploitation balance than agents with single memory systems or no memory.",
+        "research_idea_variables": "Independent variables: Memory system type (none, short-term only, long-term only, dual). Control variables: Environment, training episodes, model architecture. Dependent variables: Task completion score, exploration coverage, exploitation efficiency.",
+        "research_idea_metric": "Primary: Average reward per episode. Secondary: Unique states visited (exploration), successful path reuse rate (exploitation), memory usage efficiency.",
+        "research_idea_baselines": "1. Memory-free agent, 2. Short-term memory only agent, 3. Long-term memory only agent",
+        "research_idea_pilot": "Test on TextWorld navigation task with 3 rooms, running 5 episodes with 15 steps each. Compare memory systems on same seeds.",
+        "research_idea_design_prompt": "Create a dual-memory agent for TextWorld navigation. Short-term memory stores current episode trajectory as (state, action, reward) tuples. Long-term memory stores successful trajectories from past episodes. At each step: (1) Update short-term memory with current state, (2) Query long-term memory for similar successful states/actions, (3) Use both memories to compute action probabilities (weight between exploration and exploitation based on memory match confidence). Use GPT2-small as base model. Test on navigation task with 3 rooms. Run 5 episodes, 15 steps each. Log full trajectories and memory states. Calculate metrics: reward per episode, unique states visited, successful path reuse rate. Compare against baselines using bootstrap resampling.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Memory Agent Example",
+            "Non-parametric Bootstrap Resampling",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld Environment",
+                "description": "TextWorld navigation environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT2-small model",
+                "description": "Base language model for agents",
+                "where": "external",
+                "effort": "minor"
+            },
+            {
+                "name": "Memory-free Agent",
+                "description": "Baseline agent without memory",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Short-term Memory Agent",
+                "description": "Agent with only short-term memory",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Long-term Memory Agent",
+                "description": "Agent with only long-term memory",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Dual-memory Agent",
+                "description": "Agent with both memory systems",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Bootstrap Analysis",
+                "description": "Statistical comparison of agent performances",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM Interface",
+                "description": "Interface for GPT2 model interactions",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Memory Storage",
+                "description": "System for storing and managing memories",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Logging System",
+                "description": "System for logging trajectories and metrics",
+                "where": "build",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "transformers (for GPT2 model)",
+            "numpy (for memory operations)",
+            "faiss (for efficient memory search)",
+            "torch (for GPT2 model)",
+            "tqdm (for progress bars)",
+            "pickle (for memory storage)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:36",
+            "inspiring_paper_ids": [
+                "2005.00811",
+                "2311.18232"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1771,
+            "time_seconds_for_this_idea": 34.1296
+        },
+        "id": "idea-2"
+    },
+    {
+        "research_idea_name": "belief-state-tracking",
+        "research_idea_long_description": "Create an agent that maintains explicit belief states about partially observable aspects of text-based games. The agent should track uncertainty about object locations, state changes, and action effects, updating beliefs based on observations and using them to guide action selection.",
+        "research_idea_short_description": "Study effectiveness of explicit belief state tracking for handling partial observability in text games.",
+        "research_idea_hypothesis": "An agent that maintains and updates explicit belief states about uncertain aspects of the environment will perform better in partially observable settings than agents without belief tracking.",
+        "research_idea_variables": "Independent variables: Belief tracking method (none, simple counts, probabilistic). Control variables: Environment parameters, training episodes, model architecture. Dependent variables: Task completion score, belief accuracy, action efficiency.",
+        "research_idea_metric": "Primary: Average reward per episode. Secondary: Belief state accuracy (compared to true state when revealed), action selection quality (measured by reward obtained following belief-based decisions).",
+        "research_idea_baselines": "1. Agent without belief tracking, 2. Agent with simple history tracking, 3. Agent with deterministic state tracking",
+        "research_idea_pilot": "Test on partially observable maze environment with 4 rooms and 3 objects, running 10 episodes with 20 steps each.",
+        "research_idea_design_prompt": "Create a belief-tracking agent for partially observable environments. Maintain belief state as probability distributions over object locations and environment states. Update beliefs using Bayes rule after each observation. Use belief state to guide action selection (higher probability of actions that would resolve uncertainty). Test on maze with 4 rooms, 3 objects. Objects' locations are only partially observable. Run 10 episodes, 20 steps each. Log full trajectories including belief states. Calculate metrics: reward per episode, belief accuracy when states are revealed, action efficiency. Compare against baselines using bootstrap resampling.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "DOT Graphviz Graph",
+            "Non-parametric Bootstrap Resampling",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld Environment",
+                "description": "Partially observable maze environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT2-small model",
+                "description": "Base language model for agents",
+                "where": "external",
+                "effort": "minor"
+            },
+            {
+                "name": "Basic Agent",
+                "description": "Baseline agent without belief tracking",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "History Agent",
+                "description": "Agent with simple history tracking",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Belief Agent",
+                "description": "Agent with probabilistic belief tracking",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Belief Visualizer",
+                "description": "Visualization of belief states using DOT graphs",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Bootstrap Analysis",
+                "description": "Statistical comparison of agent performances",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM Interface",
+                "description": "Interface for GPT2 model interactions",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Logging System",
+                "description": "System for logging trajectories and metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Belief State Visualizer",
+                "description": "Additional visualizations for belief states",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "transformers (for GPT2 model)",
+            "numpy (for probability calculations)",
+            "scipy (for statistical operations)",
+            "torch (for GPT2 model)",
+            "tqdm (for progress bars)",
+            "matplotlib (for belief visualization)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:36",
+            "inspiring_paper_ids": [
+                "2005.00811",
+                "2311.18232"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1771,
+            "time_seconds_for_this_idea": 34.1296
+        },
+        "id": "idea-3"
+    },
+    {
+        "research_idea_name": "hierarchical-planning",
+        "research_idea_long_description": "Develop an agent that uses hierarchical planning for text-based games, decomposing complex goals into subgoals and learning reusable skills for common subtasks. The agent should learn both the decomposition of goals and the policies for achieving subgoals.",
+        "research_idea_short_description": "Investigate hierarchical planning and skill learning for text-based game agents.",
+        "research_idea_hypothesis": "An agent using hierarchical planning will learn more efficiently and generalize better than agents using flat planning approaches, particularly on complex tasks with clear subtask structure.",
+        "research_idea_variables": "Independent variables: Planning approach (flat vs hierarchical), skill learning method (end-to-end vs subtask-specific). Control variables: Environment parameters, training episodes, model architecture. Dependent variables: Task completion score, skill reuse rate, generalization performance.",
+        "research_idea_metric": "Primary: Average reward per episode. Secondary: Skill learning efficiency (measured by successful skill reuse), subtask completion rate, generalization to new task variants.",
+        "research_idea_baselines": "1. Flat planning agent, 2. Fixed-hierarchy agent, 3. Simple reactive agent",
+        "research_idea_pilot": "Test on cooking task with 2 recipes sharing common subtasks, running 10 episodes with 30 steps each.",
+        "research_idea_design_prompt": "Create a hierarchical planning agent for cooking tasks. Implement two-level hierarchy: high-level planner decomposes recipes into subtasks (e.g., find ingredient, cook ingredient), low-level skills learn to accomplish subtasks. Use option framework for skill learning. Test on environment with 2 recipes sharing subtasks. Run 10 episodes, 30 steps each. Log full trajectories including hierarchical plans and skill usage. Calculate metrics: reward per episode, skill reuse rate, subtask completion rate. Compare against baselines using bootstrap resampling.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "ReAct Agent Example",
+            "Non-parametric Bootstrap Resampling",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld Environment",
+                "description": "Cooking environment with multiple recipes",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT2-medium model",
+                "description": "Base language model for agents",
+                "where": "external",
+                "effort": "minor"
+            },
+            {
+                "name": "Flat Agent",
+                "description": "Baseline agent without hierarchy",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Fixed-hierarchy Agent",
+                "description": "Agent with predefined task hierarchy",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Hierarchical Agent",
+                "description": "Agent with learned hierarchy and skills",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Bootstrap Analysis",
+                "description": "Statistical comparison of agent performances",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM Interface",
+                "description": "Interface for GPT2 model interactions",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Logging System",
+                "description": "System for logging trajectories and metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Skill Library",
+                "description": "System for managing learned skills",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "transformers (for GPT2 model)",
+            "numpy (for numerical operations)",
+            "torch (for GPT2 model)",
+            "tqdm (for progress bars)",
+            "pickle (for saving hierarchical plans)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:36",
+            "inspiring_paper_ids": [
+                "2005.00811",
+                "2311.18232"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1771,
+            "time_seconds_for_this_idea": 34.1296
+        },
+        "id": "idea-4"
+    },
+    {
+        "research_idea_name": "adaptive-exploration",
+        "research_idea_long_description": "Create an agent that adaptively adjusts its exploration strategy based on task progress and environment structure. The agent should learn to identify when to explore new areas versus exploit known good strategies, and adjust its exploration parameters accordingly.",
+        "research_idea_short_description": "Study adaptive exploration strategies for text-based game agents.",
+        "research_idea_hypothesis": "An agent that adaptively adjusts its exploration strategy based on task progress and environment structure will perform better than agents with fixed exploration strategies.",
+        "research_idea_variables": "Independent variables: Exploration strategy (fixed, progress-based, structure-based, fully adaptive). Control variables: Environment parameters, training episodes, model architecture. Dependent variables: Task completion score, exploration efficiency, adaptation quality.",
+        "research_idea_metric": "Primary: Average reward per episode. Secondary: Exploration coverage, strategy adaptation rate, performance improvement over time.",
+        "research_idea_baselines": "1. Fixed epsilon-greedy agent, 2. UCB agent, 3. Simple random exploration agent",
+        "research_idea_pilot": "Test on navigation task with 3 room types (easy, medium, hard), running 10 episodes with 25 steps each.",
+        "research_idea_design_prompt": "Create an adaptive exploration agent for navigation tasks. Implement multiple exploration strategies (random, directed, focused) and a meta-controller that selects strategies based on current state and history. Track task progress and environment structure to guide strategy selection. Test on environment with varied difficulty rooms. Run 10 episodes, 25 steps each. Log full trajectories including strategy selections and adaptation decisions. Calculate metrics: reward per episode, exploration coverage, strategy adaptation rate. Compare against baselines using bootstrap resampling.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Memory Agent Example",
+            "Non-parametric Bootstrap Resampling",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld Environment",
+                "description": "Navigation environment with varied difficulty",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT2-small model",
+                "description": "Base language model for agents",
+                "where": "external",
+                "effort": "minor"
+            },
+            {
+                "name": "Epsilon-greedy Agent",
+                "description": "Baseline agent with fixed exploration",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "UCB Agent",
+                "description": "Agent using UCB exploration",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Adaptive Agent",
+                "description": "Agent with adaptive exploration",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Bootstrap Analysis",
+                "description": "Statistical comparison of agent performances",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM Interface",
+                "description": "Interface for GPT2 model interactions",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Logging System",
+                "description": "System for logging trajectories and metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Strategy Visualizer",
+                "description": "Visualization of exploration strategies",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "transformers (for GPT2 model)",
+            "numpy (for numerical operations)",
+            "scipy (for statistical calculations)",
+            "torch (for GPT2 model)",
+            "tqdm (for progress bars)",
+            "matplotlib (for strategy visualization)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:36",
+            "inspiring_paper_ids": [
+                "2005.00811",
+                "2311.18232"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1771,
+            "time_seconds_for_this_idea": 34.1296
+        },
+        "id": "idea-5"
+    },
+    {
+        "research_idea_name": "progressive-knowledge-pruning",
+        "research_idea_long_description": "Investigate whether dynamically pruning outdated or irrelevant information from an agent's knowledge graph can improve performance in text-based games. The hypothesis is that maintaining only relevant, recent knowledge will help the agent focus on current game state and reduce noise in decision making. This extends the KG-A2C work by adding a pruning mechanism that removes knowledge graph nodes that haven't been used in decision making for N steps.",
+        "research_idea_short_description": "Study if removing outdated knowledge graph information improves agent performance in text games.",
+        "research_idea_hypothesis": "Dynamically pruning outdated or unused nodes from an agent's knowledge graph will improve its performance by reducing noise and helping it focus on relevant current information.",
+        "research_idea_variables": "Independent variables: (1) Pruning strategy (none/baseline, time-based pruning, utility-based pruning), (2) Pruning threshold (number of steps before considering information outdated). Dependent variables: (1) Game score, (2) Knowledge graph size over time, (3) Action selection accuracy. Control variables: (1) Game environment parameters, (2) Training duration, (3) Model architecture.",
+        "research_idea_metric": "Primary metrics: (1) Average game score across episodes, (2) Rate of score improvement over training. Secondary metrics: (1) Knowledge graph size over time, (2) Percentage of pruned nodes that were later needed (to measure pruning accuracy), (3) Action selection accuracy before/after pruning.",
+        "research_baselines": "1. Standard KG-A2C without pruning, 2. KG-A2C with random node pruning, 3. KG-A2C with simple time-based pruning (remove nodes older than N steps)",
+        "research_idea_pilot": "Test on a small TextWorld environment with 2-3 rooms and simple tasks, using only time-based pruning with a fixed threshold. Run for 10 episodes with 20 steps each.",
+        "research_idea_design_prompt": "Create an agent that extends the KG-A2C architecture by adding a knowledge graph pruning mechanism. The agent should maintain a usage timestamp for each node in the knowledge graph. After each action, update these timestamps for any nodes used in the action selection process. Implement three pruning strategies: (1) Time-based: Remove nodes not used in N steps, (2) Utility-based: Remove nodes with lowest action influence scores, (3) Random: Randomly remove X% of nodes periodically. The pruning should occur every K steps, where K is a hyperparameter. Test on TextWorld with default cooking task, 3 rooms, using seeds 1-3 for quick pilot testing. Log the knowledge graph state (as DOT files) before and after each pruning operation. Track and log: (1) Game score per episode, (2) Knowledge graph size over time, (3) Action selection accuracy, (4) Percentage of pruned nodes later needed. Generate plots comparing performance across pruning strategies. Save all metrics in JSON format for analysis.",
+        "research_idea_codeblocks": [
+            "DOT Graphviz Graph",
+            "TextWorldExpress API Example",
+            "MatPlotLib Line Plot",
+            "Logger/Debugging",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "KG-A2C baseline",
+                "description": "The base KG-A2C agent implementation",
+                "where": "external",
+                "effort": "major"
+            },
+            {
+                "name": "Pruning mechanism",
+                "description": "New code for implementing the three pruning strategies",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "TextWorld environment",
+                "description": "The TextWorld game environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Knowledge graph visualization",
+                "description": "DOT/Graphviz graph generation and visualization",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics logging",
+                "description": "Logging system for tracking metrics and generating reports",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Performance plotting",
+                "description": "MatPlotLib-based plotting for visualizing results",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface for LLM interactions through proxy",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "gpt-4o model",
+                "description": "The GPT-4 model through OpenAI API",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Data storage",
+                "description": "System for storing and loading graph states and metrics",
+                "where": "build",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "numpy (for numerical operations)",
+            "pandas (for data analysis)",
+            "json (for data storage)",
+            "pickle (for graph state storage)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:46",
+            "inspiring_paper_ids": [
+                "2001.08837",
+                "2310.05746"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1665,
+            "time_seconds_for_this_idea": 36.278
+        },
+        "id": "idea-6"
+    },
+    {
+        "research_idea_name": "hierarchical-template-selection",
+        "research_idea_long_description": "Develop a hierarchical approach to template-based action selection where templates are first grouped into high-level categories (e.g., navigation, object interaction, information gathering) and the agent first selects a category before choosing a specific template. This could improve exploration efficiency by providing more structure to the action space.",
+        "research_idea_short_description": "Investigate if hierarchical template selection improves action space exploration in text games.",
+        "research_idea_hypothesis": "Hierarchical organization of action templates will improve exploration efficiency and lead to better performance compared to flat template selection.",
+        "research_idea_variables": "Independent variables: (1) Template organization method (flat vs hierarchical), (2) Number of template categories, (3) Category assignment strategy. Dependent variables: (1) Game score, (2) Action space coverage, (3) Learning speed. Control variables: (1) Game environment, (2) Training duration, (3) Base model architecture.",
+        "research_idea_metric": "Primary: Average game score. Secondary: (1) Percentage of unique templates used, (2) Time to reach score thresholds, (3) Action category distribution over time.",
+        "research_baselines": "1. Standard template-based agent (TDQN), 2. Random template selection, 3. Frequency-based template selection",
+        "research_idea_pilot": "Test on Zork1 with a simple 3-category template organization (movement, interaction, information) for 5 episodes of 25 steps each.",
+        "research_idea_design_prompt": "Implement a hierarchical template selection mechanism that organizes action templates into categories. First, analyze all templates and assign them to categories using simple rules (e.g., templates with 'go', 'move', 'walk' are navigation). Create a two-level selection process where the agent first picks a category, then a template within that category. Use the ReAct agent architecture as a base, modifying the action selection to use this hierarchical approach. Test on Zork1 using seeds 1-3 for pilot testing. Track: (1) Category selection distribution, (2) Template usage within categories, (3) Game score progression. Log all decisions and scores in JSON format. Generate visualizations showing category usage over time and performance comparisons with baselines. Save the category assignments and selection probabilities at regular intervals.",
+        "research_idea_codeblocks": [
+            "ReAct Agent Example",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "ReAct baseline",
+                "description": "Base ReAct agent implementation",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Hierarchical selector",
+                "description": "New hierarchical template selection mechanism",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Template categorizer",
+                "description": "System for categorizing templates",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Metrics tracking",
+                "description": "System for tracking hierarchical selection metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Performance visualization",
+                "description": "Plotting for hierarchical metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface for LLM interactions through proxy",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "gpt-4o model",
+                "description": "The GPT-4 model through OpenAI API",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Template storage",
+                "description": "System for storing template hierarchies and metadata",
+                "where": "build",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "numpy (for numerical operations)",
+            "sklearn (for clustering if needed)",
+            "json (for template storage)",
+            "yaml (for configuration)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:46",
+            "inspiring_paper_ids": [
+                "2001.08837",
+                "2310.05746"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1665,
+            "time_seconds_for_this_idea": 36.278
+        },
+        "id": "idea-7"
+    },
+    {
+        "research_idea_name": "memory-guided-exploration",
+        "research_idea_long_description": "Develop an exploration strategy that uses the agent's knowledge graph to identify unexplored or underexplored areas of the game world. The agent should maintain exploration scores for different regions and use these to guide its action selection, balancing exploration of new areas with exploitation of known rewarding paths.",
+        "research_idea_short_description": "Use knowledge graph structure to guide exploration strategy in text games.",
+        "research_idea_hypothesis": "Using knowledge graph structure to guide exploration will lead to more efficient discovery of game mechanics and higher scores compared to random or simple exploration strategies.",
+        "research_idea_variables": "Independent variables: (1) Exploration strategy (random, knowledge-guided, hybrid), (2) Exploration score calculation method. Dependent variables: (1) Game score, (2) Area coverage, (3) Time to discover key game elements. Control variables: (1) Game environment, (2) Knowledge graph structure, (3) Training duration.",
+        "research_idea_metric": "Primary: Game score. Secondary: (1) Percentage of game area discovered, (2) Time to find key items/locations, (3) Exploration efficiency (new discoveries per action).",
+        "research_idea_baselines": "1. Random exploration, 2. Standard KG-A2C exploration, 3. Epsilon-greedy exploration",
+        "research_idea_pilot": "Test on a small DiscoveryWorld environment with 5 rooms and 3 key items, running 10 episodes of 20 steps each.",
+        "research_idea_design_prompt": "Create an agent that uses its knowledge graph to guide exploration. For each node in the graph, maintain an exploration score based on (1) number of times visited, (2) number of connected unexplored edges, (3) time since last visit. Implement three exploration strategies: (1) Pure exploration score-based, (2) Hybrid score/reward-based, (3) Random baseline. Test on DiscoveryWorld with default parameters. Track and log: (1) Knowledge graph growth over time, (2) Exploration scores for all nodes, (3) Action selection distribution, (4) Game score progression. Generate visualizations showing exploration patterns and performance comparisons. Save all metrics and graphs in formats suitable for analysis. The knowledge graph should be saved in DOT format at regular intervals, with exploration scores encoded as node attributes.",
+        "research_idea_codeblocks": [
+            "DiscoveryWorld API Example",
+            "DOT Graphviz Graph",
+            "MatPlotLib Line Plot",
+            "Logger/Debugging",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "DiscoveryWorld environment",
+                "description": "The DiscoveryWorld game environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Exploration scorer",
+                "description": "System for calculating and updating exploration scores",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Knowledge graph manager",
+                "description": "System for maintaining and updating the knowledge graph",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Graph visualization",
+                "description": "DOT/Graphviz visualization with exploration scores",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics logging",
+                "description": "System for tracking exploration metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface for LLM interactions through proxy",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "gpt-4o model",
+                "description": "The GPT-4 model through OpenAI API",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Graph database",
+                "description": "System for efficient graph storage and querying",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "numpy (for numerical operations)",
+            "pandas (for data analysis)",
+            "json (for data storage)",
+            "sqlite3 (for graph database)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:46",
+            "inspiring_paper_ids": [
+                "2001.08837",
+                "2310.05746"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1665,
+            "time_seconds_for_this_idea": 36.278
+        },
+        "id": "idea-8"
+    },
+    {
+        "research_idea_name": "adaptive-template-generation",
+        "research_idea_long_description": "Instead of using a fixed set of templates, develop a system that can adaptively generate and modify templates based on successful actions during gameplay. This could help discover novel action patterns and adapt to different game styles.",
+        "research_idea_short_description": "Learn to generate and modify action templates based on successful gameplay experiences.",
+        "research_idea_hypothesis": "Adaptive template generation will discover more effective action patterns and lead to better performance than using fixed templates.",
+        "research_idea_variables": "Independent variables: (1) Template generation method (fixed, adaptive, hybrid), (2) Template modification frequency, (3) Success threshold for template adoption. Dependent variables: (1) Game score, (2) Template effectiveness, (3) Template diversity. Control variables: (1) Game environment, (2) Training duration, (3) Initial template set.",
+        "research_idea_metric": "Primary: Game score. Secondary: (1) Number of successful templates generated, (2) Template usage distribution, (3) Average reward per template type.",
+        "research_idea_baselines": "1. Fixed template set (TDQN), 2. Random template generation, 3. Frequency-based template selection",
+        "research_idea_pilot": "Test on TextWorld with a small initial template set (10 templates) and simple template generation rules, running 5 episodes of 20 steps each.",
+        "research_idea_design_prompt": "Implement a system that can generate and modify action templates during gameplay. Start with a small set of basic templates. After each successful action (defined as leading to positive reward or world state change), analyze the action structure to potentially create new templates. Implement template scoring based on (1) Success rate, (2) Average reward, (3) Usage frequency. Periodically prune low-scoring templates. Test on TextWorld cooking tasks with seeds 1-3. Track and log: (1) Template generation/modification events, (2) Template success rates, (3) Game score progression. Generate visualizations showing template evolution and performance impacts. Save all templates and their metrics in JSON format.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "Logger/Debugging",
+            "MatPlotLib Line Plot",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld environment",
+                "description": "The TextWorld game environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Template generator",
+                "description": "System for generating and modifying templates",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Template scorer",
+                "description": "System for tracking template effectiveness",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Metrics logging",
+                "description": "System for tracking template metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Performance visualization",
+                "description": "Plotting for template evolution metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface for LLM interactions through proxy",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "gpt-4o model",
+                "description": "The GPT-4 model through OpenAI API",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Template storage",
+                "description": "Database for storing and managing templates",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "numpy (for numerical operations)",
+            "nltk (for template analysis)",
+            "json (for template storage)",
+            "re (for regex operations)",
+            "sqlite3 (for template database)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:46",
+            "inspiring_paper_ids": [
+                "2001.08837",
+                "2310.05746"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1665,
+            "time_seconds_for_this_idea": 36.278
+        },
+        "id": "idea-9"
+    },
+    {
+        "research_idea_name": "compositional-knowledge-transfer",
+        "research_idea_long_description": "Investigate how to decompose knowledge graphs into reusable components that can be transferred between different games in similar genres. This could help agents learn new games faster by leveraging knowledge from previously played games.",
+        "research_idea_short_description": "Study how to transfer knowledge graph components between similar text games.",
+        "research_idea_hypothesis": "Decomposing and transferring relevant knowledge graph components between similar games will improve learning speed and performance on new games.",
+        "research_idea_variables": "Independent variables: (1) Knowledge transfer method (none, full graph, compositional), (2) Game similarity threshold, (3) Component selection strategy. Dependent variables: (1) Learning speed, (2) Game score, (3) Transfer success rate. Control variables: (1) Game environments, (2) Training duration, (3) Model architecture.",
+        "research_idea_metric": "Primary: Learning speed (steps to reach score thresholds). Secondary: (1) Final game score, (2) Transfer success rate, (3) Component reuse frequency.",
+        "research_idea_baselines": "1. No transfer learning, 2. Full graph transfer, 3. Random component transfer",
+        "research_idea_pilot": "Test on two similar TextWorld cooking games, transferring knowledge about basic cooking actions and object relationships, running 5 episodes of 20 steps each.",
+        "research_idea_design_prompt": "Create a system for decomposing knowledge graphs into transferable components. Define components based on subgraph patterns (e.g., object-action relationships, spatial relationships). Implement three transfer methods: (1) No transfer (baseline), (2) Full graph transfer, (3) Compositional transfer. Test on TextWorld cooking tasks, using one game to build the knowledge base and transferring to a similar but different game. Track: (1) Learning curves, (2) Component transfer success, (3) Game score progression. Generate visualizations showing transfer effects and performance comparisons. Save all components and transfer metrics in JSON format. Knowledge graphs should be saved in DOT format with component boundaries clearly marked.",
+        "research_idea_codeblocks": [
+            "TextWorldExpress API Example",
+            "DOT Graphviz Graph",
+            "MatPlotLib Line Plot",
+            "Logger/Debugging",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "TextWorld environment",
+                "description": "The TextWorld game environment",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Knowledge decomposer",
+                "description": "System for decomposing knowledge graphs",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Transfer mechanism",
+                "description": "System for transferring knowledge components",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Graph visualization",
+                "description": "DOT/Graphviz visualization with component marking",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics logging",
+                "description": "System for tracking transfer metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface for LLM interactions through proxy",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "gpt-4o model",
+                "description": "The GPT-4 model through OpenAI API",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Graph database",
+                "description": "Database for storing and managing graph components",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "numpy (for numerical operations)",
+            "sklearn (for similarity calculations)",
+            "json (for data storage)",
+            "sqlite3 (for graph database)",
+            "tqdm (for progress bars)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:46",
+            "inspiring_paper_ids": [
+                "2001.08837",
+                "2310.05746"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.1665,
+            "time_seconds_for_this_idea": 36.278
+        },
+        "id": "idea-10"
+    },
+    {
+        "research_idea_name": "knowledge-graph-memory",
+        "research_idea_long_description": "Develop an agent that builds and maintains a knowledge graph of the environment during exploration, using it to inform decision making. The knowledge graph will store object locations, relationships, and state changes, helping the agent make more informed decisions about which actions to take. This addresses the challenge of maintaining useful memory representations in text games.",
+        "research_idea_short_description": "Using knowledge graphs as memory for text-game agents to improve decision making and exploration efficiency.",
+        "research_idea_hypothesis": "An agent that maintains a structured knowledge graph representation of its environment will perform better than one using unstructured memory, as measured by task completion scores and exploration efficiency.",
+        "research_idea_variables": "Independent variables: (1) Memory representation type (knowledge graph vs baseline memory), (2) Knowledge graph update frequency. Controlled variables: (1) Environment parameters, (2) Training episodes, (3) Episode length, (4) Model architecture. Dependent variables: (1) Task completion scores, (2) Exploration efficiency (measured by unique states visited).",
+        "research_idea_metric": "Primary metrics: (1) Average task completion score across evaluation episodes, (2) Number of unique states visited per episode. Secondary metrics: (1) Knowledge graph size/complexity over time, (2) Action selection accuracy (measured by % of actions that lead to score increases).",
+        "research_baselines": "1. ReAct baseline without knowledge graph memory, 2. Memory Agent baseline using standard vector memory",
+        "research_idea_pilot": "Test on ALFWorld with 2 episodes of 20 steps each, using only the 'pick' and 'examine' task types. Build minimal knowledge graph tracking only object locations.",
+        "research_idea_design_prompt": "Create an agent that builds a knowledge graph while exploring ALFWorld environments. The knowledge graph should be stored in DOT format with nodes representing objects/locations and edges representing relationships/actions. At each step: 1) Parse the observation text to extract entities and relationships, 2) Update the knowledge graph with new information, 3) Use the graph to inform action selection by querying relevant subgraphs. Save the graph state after each step as a DOT file. Convert graphs to PDFs with new nodes highlighted in red. Test on ALFWorld pick/examine tasks, 2 episodes, 20 steps each. Compare performance against ReAct baseline. Log full trajectories including observations, actions, scores, and graph states.",
+        "research_idea_codeblocks": [
+            "DOT Graphviz Graph",
+            "ReAct Agent Example",
+            "ALFWorld API Example",
+            "Logger/Debugging",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "Knowledge Graph Agent",
+                "description": "The new agent that builds and uses knowledge graphs",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "ReAct baseline",
+                "description": "ReAct baseline agent for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Memory Agent baseline",
+                "description": "Memory Agent baseline for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ALFWorld environment",
+                "description": "The ALFWorld environment for testing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "DOT graph generator",
+                "description": "Code to generate and update DOT format graphs",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Graph visualization",
+                "description": "Code to convert DOT to PDF with highlighting",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface to GPT model for text processing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT-4",
+                "description": "GPT-4 model for text processing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Entity extractor",
+                "description": "Code to extract entities from text",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Relationship extractor",
+                "description": "Code to extract relationships from text",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Graph query module",
+                "description": "Code to query the knowledge graph",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Performance analyzer",
+                "description": "Code to compute metrics and generate reports",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "PDF converter",
+                "description": "Code to convert DOT files to PDF",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Logger",
+                "description": "Code to log trajectories and metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "spacy (for entity extraction)",
+            "graphviz (for graph visualization)",
+            "pdflatex (for PDF conversion)",
+            "numpy (for numerical operations)",
+            "pandas (for data analysis)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:56",
+            "inspiring_paper_ids": [
+                "1705.05637",
+                "2305.15695"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.2372,
+            "time_seconds_for_this_idea": 38.2937
+        },
+        "id": "idea-11"
+    },
+    {
+        "research_idea_name": "adaptive-asking-strategy",
+        "research_idea_long_description": "Develop an agent that learns when to ask questions versus explore independently, adapting its information gathering strategy based on past experience and current context. This builds on the ABA (Asking Before Acting) approach but makes the asking strategy more selective and efficient.",
+        "research_idea_short_description": "Learning when to ask questions versus explore independently in text-based environments.",
+        "research_idea_hypothesis": "An agent that adaptively chooses between asking and exploring will perform better than one with a fixed strategy, particularly in terms of information gathering efficiency.",
+        "research_idea_variables": "Independent variables: (1) Information gathering strategy (adaptive vs fixed), (2) Question budget per episode. Controlled variables: (1) Environment parameters, (2) Available question types, (3) Episode length. Dependent variables: (1) Task completion scores, (2) Question efficiency (useful information per question).",
+        "research_idea_metric": "Primary metrics: (1) Task completion score, (2) Information gain per question (measured by subsequent score increases), (3) Question efficiency (ratio of useful to total questions asked).",
+        "research_idea_baselines": "1. Standard ABA agent with fixed asking strategy, 2. ReAct baseline without asking capability",
+        "research_idea_pilot": "Test on ALFWorld with 3 episodes of 15 steps each, using a simple adaptive strategy that only asks questions when confidence in action selection is below a threshold.",
+        "research_idea_design_prompt": "Create an agent that learns when to ask questions vs explore. The agent should maintain a confidence score for each potential action. When confidence falls below a threshold, generate a question using the ABA approach. Track the usefulness of each question by measuring score increases following the answer. Adjust asking threshold based on question utility history. Test on ALFWorld, 3 episodes, 15 steps each. Compare against standard ABA baseline. Log trajectories including confidence scores, questions asked, and resulting score changes.",
+        "research_idea_codeblocks": [
+            "ReAct Agent Example",
+            "ALFWorld API Example",
+            "Logger/Debugging",
+            "LLM example through proxy server",
+            "Non-parametric Bootstrap Resampling"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "Adaptive ABA Agent",
+                "description": "The new agent with adaptive asking strategy",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "Standard ABA baseline",
+                "description": "Standard ABA agent for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ReAct baseline",
+                "description": "ReAct baseline for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ALFWorld environment",
+                "description": "The ALFWorld environment for testing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Confidence estimator",
+                "description": "Module to estimate action confidence",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Question utility tracker",
+                "description": "Module to track question usefulness",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Adaptive threshold",
+                "description": "Module to adjust asking threshold",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface to GPT model",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT-4",
+                "description": "GPT-4 model for text processing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Bootstrap analysis",
+                "description": "Statistical analysis of results",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics computer",
+                "description": "Module to compute performance metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Logger",
+                "description": "Code to log trajectories and metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "numpy (for numerical operations)",
+            "scipy (for statistical tests)",
+            "pandas (for data analysis)",
+            "scikit-learn (for metrics)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:56",
+            "inspiring_paper_ids": [
+                "1705.05637",
+                "2305.15695"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.2372,
+            "time_seconds_for_this_idea": 38.2937
+        },
+        "id": "idea-12"
+    },
+    {
+        "research_idea_name": "hierarchical-exploration",
+        "research_idea_long_description": "Implement a hierarchical exploration strategy where the agent first builds a high-level map of the environment (rooms, major objects) before detailed exploration of promising areas. This addresses the challenge of efficient exploration in large text-game environments.",
+        "research_idea_short_description": "Using hierarchical exploration to improve efficiency in large text-game environments.",
+        "research_idea_hypothesis": "A hierarchical exploration strategy will lead to more efficient environment exploration and better task performance compared to flat exploration strategies.",
+        "research_idea_variables": "Independent variables: (1) Exploration strategy (hierarchical vs flat), (2) Hierarchy depth. Controlled variables: (1) Environment size/complexity, (2) Episode length, (3) Action space. Dependent variables: (1) Task completion scores, (2) Exploration coverage, (3) Time to find key objects.",
+        "research_idea_metric": "Primary metrics: (1) Task completion score, (2) Exploration coverage (% of reachable states visited), (3) Average time to find task-relevant objects. Secondary metrics: (1) Quality of environment map, (2) Navigation efficiency.",
+        "research_idea_baselines": "1. ReAct baseline with flat exploration, 2. Random exploration baseline",
+        "research_idea_pilot": "Test on ALFWorld with 2 episodes of 25 steps each, using a two-level hierarchy (rooms then objects).",
+        "research_idea_design_prompt": "Create an agent that explores text environments hierarchically. First phase: Build room-level map using movement actions. Second phase: Detailed exploration of promising rooms based on task relevance. Use DOT graphs to represent both hierarchy levels. Track exploration coverage and object discovery times. Test on ALFWorld, 2 episodes, 25 steps each. Compare against flat exploration baseline. Log full trajectories and hierarchical maps.",
+        "research_idea_codeblocks": [
+            "DOT Graphviz Graph",
+            "ReAct Agent Example",
+            "ALFWorld API Example",
+            "Logger/Debugging",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "Hierarchical Explorer",
+                "description": "The new hierarchical exploration agent",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "ReAct baseline",
+                "description": "ReAct baseline for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ALFWorld environment",
+                "description": "The ALFWorld environment for testing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Hierarchical mapper",
+                "description": "Module to build hierarchical maps",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Room detector",
+                "description": "Module to identify room boundaries",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Relevance scorer",
+                "description": "Module to score room relevance",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "DOT graph generator",
+                "description": "Generate DOT format graphs",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface to GPT model",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT-4",
+                "description": "GPT-4 model for text processing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Coverage tracker",
+                "description": "Track exploration coverage",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics computer",
+                "description": "Module to compute performance metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Logger",
+                "description": "Code to log trajectories and metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Visualization module",
+                "description": "Code to visualize exploration patterns",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "networkx (for graph operations)",
+            "matplotlib (for visualization)",
+            "numpy (for numerical operations)",
+            "pandas (for data analysis)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:56",
+            "inspiring_paper_ids": [
+                "1705.05637",
+                "2305.15695"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.2372,
+            "time_seconds_for_this_idea": 38.2937
+        },
+        "id": "idea-13"
+    },
+    {
+        "research_idea_name": "contextual-action-pruning",
+        "research_idea_long_description": "Develop an agent that uses contextual information to prune unlikely or irrelevant actions from consideration, reducing the effective action space. This addresses the challenge of large action spaces in text games while maintaining the ability to find novel solutions.",
+        "research_idea_short_description": "Using context to intelligently reduce the action space in text-based games.",
+        "research_idea_hypothesis": "Contextual action pruning will improve agent performance by reducing the action space while maintaining the ability to find valid solutions.",
+        "research_idea_variables": "Independent variables: (1) Pruning strategy (contextual vs static), (2) Pruning threshold. Controlled variables: (1) Environment parameters, (2) Episode length, (3) Base action space. Dependent variables: (1) Task completion scores, (2) Action space size, (3) Solution novelty.",
+        "research_idea_metric": "Primary metrics: (1) Task completion score, (2) Effective action space size, (3) Rate of finding valid novel solutions. Secondary metrics: (1) Action selection time, (2) Pruning accuracy.",
+        "research_idea_baselines": "1. ReAct baseline without pruning, 2. Static action pruning baseline",
+        "research_idea_pilot": "Test on ALFWorld with 2 episodes of 20 steps each, using simple context-based rules for pruning.",
+        "research_idea_design_prompt": "Create an agent that prunes actions based on context. Extract context features from current state. Score each action's relevance using LLM. Prune actions below threshold, adjusting threshold based on success rate. Track pruned vs selected actions and their outcomes. Test on ALFWorld, 2 episodes, 20 steps each. Compare against non-pruning baseline. Log trajectories including pruning decisions and outcomes.",
+        "research_idea_codeblocks": [
+            "ReAct Agent Example",
+            "ALFWorld API Example",
+            "Logger/Debugging",
+            "LLM example through proxy server",
+            "Non-parametric Bootstrap Resampling"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "Pruning Agent",
+                "description": "The new agent with contextual pruning",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "ReAct baseline",
+                "description": "ReAct baseline for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ALFWorld environment",
+                "description": "The ALFWorld environment for testing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Context extractor",
+                "description": "Module to extract context features",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Action scorer",
+                "description": "Module to score action relevance",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Pruning module",
+                "description": "Module to prune actions",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface to GPT model",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT-4",
+                "description": "GPT-4 model for text processing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Bootstrap analysis",
+                "description": "Statistical analysis of results",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics computer",
+                "description": "Module to compute performance metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Logger",
+                "description": "Code to log trajectories and metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Action space analyzer",
+                "description": "Module to analyze action space statistics",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "numpy (for numerical operations)",
+            "scipy (for statistical tests)",
+            "pandas (for data analysis)",
+            "scikit-learn (for metrics)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:56",
+            "inspiring_paper_ids": [
+                "1705.05637",
+                "2305.15695"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.2372,
+            "time_seconds_for_this_idea": 38.2937
+        },
+        "id": "idea-14"
+    },
+    {
+        "research_idea_name": "progressive-knowledge-transfer",
+        "research_idea_long_description": "Implement a progressive knowledge transfer system where the agent builds up knowledge across multiple episodes of similar tasks, focusing on transferable skills and information. This addresses the challenge of leveraging past experience while respecting evaluation episode independence.",
+        "research_idea_short_description": "Transferring knowledge between training episodes while maintaining evaluation independence.",
+        "research_idea_hypothesis": "Progressive knowledge transfer during training will improve agent performance while maintaining proper evaluation episode independence.",
+        "research_idea_variables": "Independent variables: (1) Knowledge transfer method (progressive vs none), (2) Knowledge retention rate. Controlled variables: (1) Task types, (2) Episode length, (3) Environment parameters. Dependent variables: (1) Task completion scores, (2) Learning efficiency, (3) Transfer success.",
+        "research_idea_metric": "Primary metrics: (1) Task completion score, (2) Learning curve steepness, (3) Transfer success rate (performance on new but similar tasks). Secondary metrics: (1) Knowledge retention accuracy, (2) Training efficiency.",
+        "research_idea_baselines": "1. ReAct baseline without knowledge transfer, 2. Memory Agent baseline",
+        "research_idea_pilot": "Test on ALFWorld with 3 episodes of 15 steps each, using simple skill-based knowledge transfer.",
+        "research_idea_design_prompt": "Create an agent that progressively builds transferable knowledge during training. Identify and store generalizable skills and information. Clear episode-specific memory between evaluation episodes. Test on ALFWorld, 3 episodes, 15 steps each. Compare against non-transfer baseline. Log knowledge acquisition and transfer events.",
+        "research_idea_codeblocks": [
+            "ReAct Agent Example",
+            "Memory Agent Example",
+            "ALFWorld API Example",
+            "Logger/Debugging",
+            "LLM example through proxy server"
+        ],
+        "research_idea_required_code_and_resources": [
+            {
+                "name": "Transfer Agent",
+                "description": "The new agent with knowledge transfer",
+                "where": "build",
+                "effort": "major"
+            },
+            {
+                "name": "ReAct baseline",
+                "description": "ReAct baseline for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Memory Agent baseline",
+                "description": "Memory Agent baseline for comparison",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "ALFWorld environment",
+                "description": "The ALFWorld environment for testing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Knowledge extractor",
+                "description": "Module to extract transferable knowledge",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Transfer module",
+                "description": "Module to transfer knowledge",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "Memory manager",
+                "description": "Module to manage episode memory",
+                "where": "build",
+                "effort": "moderate"
+            },
+            {
+                "name": "LLM interface",
+                "description": "Interface to GPT model",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "GPT-4",
+                "description": "GPT-4 model for text processing",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Metrics computer",
+                "description": "Module to compute performance metrics",
+                "where": "build",
+                "effort": "minor"
+            },
+            {
+                "name": "Logger",
+                "description": "Code to log trajectories and metrics",
+                "where": "existing codeblock",
+                "effort": "minor"
+            },
+            {
+                "name": "Knowledge analyzer",
+                "description": "Module to analyze knowledge transfer patterns",
+                "where": "build",
+                "effort": "moderate"
+            }
+        ],
+        "research_idea_external_requirements": [
+            "numpy (for numerical operations)",
+            "pandas (for data analysis)",
+            "scikit-learn (for metrics)",
+            "matplotlib (for learning curves)"
+        ],
+        "metadata": {
+            "date_generated": "2025-03-07 14:46:56",
+            "inspiring_paper_ids": [
+                "1705.05637",
+                "2305.15695"
+            ],
+            "generated_using_model": "claude-3-5-sonnet-20241022",
+            "condition_on_codeblocks": true,
+            "additional_conditioning_text": "RESEARCH METHODS: Important things to remember regarding research methods in this domain:\n1. Agent performance on most text games is low, because these tasks tend to be hard for them.  Instead of expecting success (which is very rare, and infrequently happens on some environments, if ever), you should measure task progress in terms of the partial progress scores that most environments provide.\n2. Similarly, remember that if an agent has separate training and evaluation periods, that (during evaluation) the memory of the agent should be reset to what it was at the end of training.  That way, it won't be using knowledge obtained in one evaluation episode for another evaluation episode. (Note that it can still record memories /during/ the evaluation episodes, but memories from one evaluation episode shouldn't be retained to another; only from training episodes -- unless there is some 'continual learning' framing to the research question).\n3. There are separate train, development, and test sets for most environments.  The train set is used to train the agent, and the development set is used to evaluate it's performance at all times except during the final experiment.  No knowledge of the test set can leak into the design or tuning of the agent.\n4. Generally mini-pilot experiments can run on only 2-3 episodes for fast debugging, up to 10 or 20 steps.  Pilot and full experiments should run on ~50 episodes, to the same number of steps (e.g. 25 or 50 steps).\n5. Most environments provide a set of seeds for training, development, and testing.  If you randomly shuffle these lists of seeds (with a static seed, like 42, so this shuffle is repeatable across runs), then you will get a more representative cross-section of the environment's problems.  Environments are often parametrically generated, and just taking incremental seeds (i.e. 1, 2, 3, ...) rather than randomly ordered seeds (e.g. 103, 40, 97, ...) may generate very similar problems, and not be representative.\n6. Remember to include appropriate baselines.  For example, an appropriate baseline for `Model A augmented with change X` is almost always `Model A without change X`, not a different model (like a random baseline).\nDETAILS: Remember to be very explicit about including details in your experiment descriptions, particularly if your ideas are based off the input papers. The input papers are NOT available to follow-on stages, so your idea must be *SELF-CONTAINED*, and describe everything that is needed to implement it faithfully.\nSCOPE: While you should use the provided codeblock templates, you should not feel entirely constrained by them -- anything that a language model can reasonably implement is fair game.  However, remember that the codeblocks are designed to be easy to implement, and that the more complex the code that a language model has to implement from scratch, the more likely it is to have bugs, or not work -- especially if it requires downloading external code.\nAUTOMATED: The experiments that you create should be experiments that can be run in a fully-automated fashion, and not require human input.\n",
+            "batch": false,
+            "batch_name": null,
+            "ideator_name": "BasicIdeator-v1",
+            "cost_for_this_idea": 0.2372,
+            "time_seconds_for_this_idea": 38.2937
+        },
+        "id": "idea-15"
+    }
+]

@@ -1,0 +1,1452 @@
+{
+    "2406.06769": {
+        "success": true,
+        "arxiv_id": "2406.06769",
+        "pdf_filename": "pdf/2406.06769.pdf",
+        "source_cleaned_filename": "source_cleaned/2406.06769/DiscoveryWorld.consolidated.tex",
+        "source_token_count_estimate": 37988,
+        "title": "DISCOVERYWORLD: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents",
+        "year": "2024",
+        "authors": [
+            "Peter Jansen",
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "Tushar Khot",
+            "Erin Bransom",
+            "Bhavana Dalvi Mishra",
+            "Bodhisattwa Prasad Majumder",
+            "Oyvind Tafjord",
+            "Peter Clark"
+        ],
+        "date_added": "2025-03-17 12:02:36",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2406.06485": {
+        "success": true,
+        "arxiv_id": "2406.06485",
+        "pdf_filename": "pdf/2406.06485.pdf",
+        "source_cleaned_filename": "source_cleaned/2406.06485/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 43515,
+        "title": "Can Language Models Serve as Text-Based World Simulators?",
+        "year": "2024",
+        "authors": [
+            "Ruoyao Wang",
+            "Graham Todd",
+            "Ziang Xiao",
+            "Xingdi Yuan",
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "Peter Clark",
+            "Peter Jansen"
+        ],
+        "date_added": "2025-03-17 12:02:45",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1806.11532": {
+        "success": true,
+        "arxiv_id": "1806.11532",
+        "pdf_filename": "pdf/1806.11532.pdf",
+        "source_cleaned_filename": "source_cleaned/1806.11532/main.consolidated.tex",
+        "source_token_count_estimate": 34985,
+        "title": "TextWorld: A Learning Environment for Text-based Games",
+        "year": "2018",
+        "authors": [
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "\u00c1kos K\u00e1d\u00e1r",
+            "Xingdi Yuan",
+            "Ben Kybartas",
+            "Tavian Barnes",
+            "Emery Fine",
+            "James Moore",
+            "Ruo Yu Tao",
+            "Matthew Hausknecht",
+            "Layla El Asri",
+            "Mahmoud Adada",
+            "Wendy Tay",
+            "Adam Trischler"
+        ],
+        "date_added": "2025-03-17 12:02:56",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2311.05772": {
+        "success": true,
+        "arxiv_id": "2311.05772",
+        "pdf_filename": "pdf/2311.05772.pdf",
+        "source_cleaned_filename": "source_cleaned/2311.05772/ADaPT.consolidated.tex",
+        "source_token_count_estimate": 27960,
+        "title": "ADaPT: As-Needed Decomposition and Planning with Language Models",
+        "year": "2023",
+        "authors": [
+            "Archiki Prasad",
+            "Alexander Koller",
+            "Mareike Hartmann",
+            "Peter Clark",
+            "Ashish Sabharwal",
+            "Mohit Bansal",
+            "Tushar Khot"
+        ],
+        "date_added": "2025-03-17 12:03:25",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2308.12915": {
+        "success": true,
+        "arxiv_id": "2308.12915",
+        "pdf_filename": "pdf/2308.12915.pdf",
+        "source_cleaned_filename": "source_cleaned/2308.12915/aaai23.consolidated.tex",
+        "source_token_count_estimate": 13963,
+        "title": "Language as Reality: A Co-Creative Storytelling Game Experience in 1001 Nights using Generative AI",
+        "year": "2023",
+        "authors": [
+            "Yuqian Sun",
+            "Zhouyi Li",
+            "Ke Fang",
+            "Chang Hee Lee",
+            "Ali Asadipour"
+        ],
+        "date_added": "2025-03-17 12:04:14",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2311.18232": {
+        "success": true,
+        "arxiv_id": "2311.18232",
+        "pdf_filename": "pdf/2311.18232.pdf",
+        "source_cleaned_filename": "source_cleaned/2311.18232/main.consolidated.tex",
+        "source_token_count_estimate": 74904,
+        "title": "LMRL Gym: Benchmarks for Multi-Turn Reinforcement Learning with Language Models",
+        "year": "2023",
+        "authors": [
+            "Marwa Abdulhai",
+            "Isadora White",
+            "Charlie Snell",
+            "Charles Sun",
+            "Joey Hong",
+            "Yuexiang Zhai",
+            "Kelvin Xu",
+            "Sergey Levine"
+        ],
+        "date_added": "2025-03-17 12:04:50",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2310.11667": {
+        "success": true,
+        "arxiv_id": "2310.11667",
+        "pdf_filename": "pdf/2310.11667.pdf",
+        "source_cleaned_filename": "source_cleaned/2310.11667/iclr2024_conference.consolidated.tex",
+        "source_token_count_estimate": 116519,
+        "title": "SOTOPIA: Interactive Evaluation for Social Intelligence in Language Agents",
+        "year": "2023",
+        "authors": [
+            "Xuhui Zhou",
+            "Hao Zhu",
+            "Leena Mathur",
+            "Ruohong Zhang",
+            "Haofei Yu",
+            "Zhengyang Qi",
+            "Louis-Philippe Morency",
+            "Yonatan Bisk",
+            "Daniel Fried",
+            "Graham Neubig",
+            "Maarten Sap"
+        ],
+        "date_added": "2025-03-17 12:05:35",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2302.02662": {
+        "success": true,
+        "arxiv_id": "2302.02662",
+        "pdf_filename": "pdf/2302.02662.pdf",
+        "source_cleaned_filename": "source_cleaned/2302.02662/main.consolidated.tex",
+        "source_token_count_estimate": 45836,
+        "title": "Grounding Large Language Models in Interactive Environments with Online Reinforcement Learning",
+        "year": "2023",
+        "authors": [
+            "Thomas Carta",
+            "Cl\u00e9ment Romac",
+            "Thomas Wolf",
+            "Sylvain Lamprier",
+            "Olivier Sigaud",
+            "Pierre-Yves Oudeyer"
+        ],
+        "date_added": "2025-03-17 12:06:22",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2310.05746": {
+        "success": true,
+        "arxiv_id": "2310.05746",
+        "pdf_filename": "pdf/2310.05746.pdf",
+        "source_cleaned_filename": "source_cleaned/2310.05746/main.consolidated.tex",
+        "source_token_count_estimate": 22451,
+        "title": "Put Your Money Where Your Mouth Is: Evaluating Strategic Planning and Execution of LLM Agents in an Auction Arena",
+        "year": "2023",
+        "authors": [
+            "Jiangjie Chen",
+            "Siyu Yuan",
+            "Rong Ye",
+            "Bodhisattwa Prasad Majumder",
+            "Kyle Richardson"
+        ],
+        "date_added": "2025-03-17 12:06:58",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2010.03768": {
+        "success": true,
+        "arxiv_id": "2010.03768",
+        "pdf_filename": "pdf/2010.03768.pdf",
+        "source_cleaned_filename": "source_cleaned/2010.03768/main.consolidated.tex",
+        "source_token_count_estimate": 29615,
+        "title": "ALFWorld: Aligning Text and Embodied Environments for Interactive Learning",
+        "year": "2020",
+        "authors": [
+            "Mohit Shridhar",
+            "Xingdi Yuan",
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "Yonatan Bisk",
+            "Adam Trischler",
+            "Matthew Hausknecht"
+        ],
+        "date_added": "2025-03-17 12:07:31",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2010.03790": {
+        "success": true,
+        "arxiv_id": "2010.03790",
+        "pdf_filename": "pdf/2010.03790.pdf",
+        "source_cleaned_filename": "source_cleaned/2010.03790/main.consolidated.tex",
+        "source_token_count_estimate": 45068,
+        "title": "Text-based RL Agents with Commonsense Knowledge: New Challenges, Environments and Baselines",
+        "year": "2020",
+        "authors": [
+            "Keerthiram Murugesan",
+            "Mattia Atzeni",
+            "Pavan Kapanipathi",
+            "Pushkar Shukla",
+            "Sadhana Kumaravel",
+            "Gerald Tesauro",
+            "Kartik Talamadupula",
+            "Mrinmaya Sachan",
+            "Murray Campbell"
+        ],
+        "date_added": "2025-03-17 12:08:12",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2007.09185": {
+        "success": true,
+        "arxiv_id": "2007.09185",
+        "pdf_filename": "pdf/2007.09185.pdf",
+        "source_cleaned_filename": "source_cleaned/2007.09185/main.consolidated.tex",
+        "source_token_count_estimate": 19883,
+        "title": "WordCraft: An Environment for Benchmarking Commonsense Agents",
+        "year": "2020",
+        "authors": [
+            "Minqi Jiang",
+            "Jelena Luketina",
+            "Nantas Nardelli",
+            "Pasquale Minervini",
+            "Philip H. S. Torr",
+            "Shimon Whiteson",
+            "Tim Rockt\u00e4schel"
+        ],
+        "date_added": "2025-03-17 12:08:38",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2106.09608": {
+        "success": true,
+        "arxiv_id": "2106.09608",
+        "pdf_filename": "pdf/2106.09608.pdf",
+        "source_cleaned_filename": "source_cleaned/2106.09608/neurips_2021.consolidated.tex",
+        "source_token_count_estimate": 26099,
+        "title": "Learning Knowledge Graph-based World Models of Textual Environments",
+        "year": "2021",
+        "authors": [
+            "Prithviraj Ammanabrolu",
+            "Mark O. Riedl"
+        ],
+        "date_added": "2025-03-17 12:09:06",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2001.10161": {
+        "success": true,
+        "arxiv_id": "2001.10161",
+        "pdf_filename": "pdf/2001.10161.pdf",
+        "source_cleaned_filename": "source_cleaned/2001.10161/ijcai20.consolidated.tex",
+        "source_token_count_estimate": 15029,
+        "title": "Bringing Stories Alive: Generating Interactive Fiction Worlds",
+        "year": "2020",
+        "authors": [
+            "Prithviraj Ammanabrolu",
+            "Wesley Cheung",
+            "Dan Tu",
+            "William Broniec",
+            "Mark O. Riedl"
+        ],
+        "date_added": "2025-03-17 12:09:43",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1911.09194": {
+        "success": true,
+        "arxiv_id": "1911.09194",
+        "pdf_filename": "pdf/1911.09194.pdf",
+        "source_cleaned_filename": "source_cleaned/1911.09194/document.consolidated.tex",
+        "source_token_count_estimate": 18554,
+        "title": "Generating Interactive Worlds with Text",
+        "year": "2019",
+        "authors": [
+            "Angela Fan",
+            "Jack Urbanek",
+            "Pratik Ringshia",
+            "Emily Dinan",
+            "Emma Qian",
+            "Siddharth Karamcheti",
+            "Shrimai Prabhumoye",
+            "Douwe Kiela",
+            "Tim Rocktaschel",
+            "Arthur Szlam",
+            "Jason Weston"
+        ],
+        "date_added": "2025-03-17 12:10:20",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2311.01468": {
+        "success": true,
+        "arxiv_id": "2311.01468",
+        "pdf_filename": "pdf/2311.01468.pdf",
+        "source_cleaned_filename": "source_cleaned/2311.01468/main.consolidated.tex",
+        "source_token_count_estimate": 18663,
+        "title": "Remember what you did so you know what to do next",
+        "year": "2023",
+        "authors": [
+            "Manuel R. Ciosici",
+            "Alex Hedges",
+            "Yash Kankanampati",
+            "Justin Martin",
+            "Marjorie Freedman",
+            "Ralph Weischedel"
+        ],
+        "date_added": "2025-03-17 12:10:50",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2301.10107": {
+        "success": true,
+        "arxiv_id": "2301.10107",
+        "pdf_filename": "pdf/2301.10107.pdf",
+        "source_cleaned_filename": "source_cleaned/2301.10107/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 26673,
+        "title": "Story Shaping: Teaching Agents Human-like Behavior with Stories",
+        "year": "2023",
+        "authors": [
+            "Xiangyu Peng",
+            "Christopher Cui",
+            "Wei Zhou",
+            "Renee Jia",
+            "Mark Riedl"
+        ],
+        "date_added": "2025-03-17 12:11:26",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.12487": {
+        "success": true,
+        "arxiv_id": "2305.12487",
+        "pdf_filename": "pdf/2305.12487.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.12487/main.consolidated.tex",
+        "source_token_count_estimate": 54940,
+        "title": "Augmenting Autotelic Agents with Large Language Models",
+        "year": "2023",
+        "authors": [
+            "C\u00e9dric Colas",
+            "Laetitia Teodorescu",
+            "Pierre-Yves Oudeyer",
+            "Xingdi Yuan",
+            "Marc-Alexandre C\u00f4t\u00e9"
+        ],
+        "date_added": "2025-03-17 12:12:23",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.17390": {
+        "success": true,
+        "arxiv_id": "2305.17390",
+        "pdf_filename": "pdf/2305.17390.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.17390/main.consolidated.tex",
+        "source_token_count_estimate": 43573,
+        "title": "SwiftSage: A Generative Agent with Fast and Slow Thinking for Complex Interactive Tasks",
+        "year": "2023",
+        "authors": [
+            "Bill Yuchen Lin",
+            "Yicheng Fu",
+            "Karina Yang",
+            "Faeze Brahman",
+            "Shiyu Huang",
+            "Chandra Bhagavatula",
+            "Prithviraj Ammanabrolu",
+            "Yejin Choi",
+            "Xiang Ren"
+        ],
+        "date_added": "2025-03-17 12:13:09",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2304.02868": {
+        "success": true,
+        "arxiv_id": "2304.02868",
+        "pdf_filename": "pdf/2304.02868.pdf",
+        "source_cleaned_filename": "source_cleaned/2304.02868/gamegpt_clean.consolidated.tex",
+        "source_token_count_estimate": 14936,
+        "title": "Can Large Language Models Play Text Games Well? Current State-of-the-Art and Open Questions",
+        "year": "2023",
+        "authors": [
+            "Chen Feng Tsai",
+            "Xiaochen Zhou",
+            "Sierra S. Liu",
+            "Jing Li",
+            "Mo Yu",
+            "Hongyuan Mei"
+        ],
+        "date_added": "2025-03-17 12:13:42",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.15695": {
+        "success": true,
+        "arxiv_id": "2305.15695",
+        "pdf_filename": "pdf/2305.15695.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.15695/iclr2024_conference.consolidated.tex",
+        "source_token_count_estimate": 119209,
+        "title": "Asking Before Acting: Gather Information in Embodied Decision Making with Language Models",
+        "year": "2023",
+        "authors": [
+            "Xiaoyu Chen",
+            "Shenao Zhang",
+            "Pushi Zhang",
+            "Li Zhao",
+            "Jianyu Chen"
+        ],
+        "date_added": "2025-03-17 12:14:22",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.02412": {
+        "success": true,
+        "arxiv_id": "2305.02412",
+        "pdf_filename": "pdf/2305.02412.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.02412/main.consolidated.tex",
+        "source_token_count_estimate": 20929,
+        "title": "Plan, Eliminate, and Track -- Language Models are Good Teachers for Embodied Agents",
+        "year": "2023",
+        "authors": [
+            "Yue Wu",
+            "So Yeon Min",
+            "Yonatan Bisk",
+            "Ruslan Salakhutdinov",
+            "Amos Azaria",
+            "Yuanzhi Li",
+            "Tom Mitchell",
+            "Shrimai Prabhumoye"
+        ],
+        "date_added": "2025-03-17 12:15:06",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.05091": {
+        "success": true,
+        "arxiv_id": "2305.05091",
+        "pdf_filename": "pdf/2305.05091.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.05091/sample-sigplan.consolidated.tex",
+        "source_token_count_estimate": 24741,
+        "title": "Knowledge-enhanced Agents for Interactive Text Games",
+        "year": "2023",
+        "authors": [
+            "Prateek Chhikara",
+            "Jiarui Zhang",
+            "Filip Ilievski",
+            "Jonathan Francis",
+            "Kaixin Ma"
+        ],
+        "date_added": "2025-03-17 12:15:39",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2002.09127": {
+        "success": true,
+        "arxiv_id": "2002.09127",
+        "pdf_filename": "pdf/2002.09127.pdf",
+        "source_cleaned_filename": "source_cleaned/2002.09127/main.consolidated.tex",
+        "source_token_count_estimate": 51967,
+        "title": "Learning Dynamic Belief Graphs to Generalize on Text-Based Games",
+        "year": "2020",
+        "authors": [
+            "Ashutosh Adhikari",
+            "Xingdi Yuan",
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "Mikul\u00e1\u0161 Zelinka",
+            "Marc-Antoine Rondeau",
+            "Romain Laroche",
+            "Pascal Poupart",
+            "Jian Tang",
+            "Adam Trischler",
+            "William L. Hamilton"
+        ],
+        "date_added": "2025-03-17 12:16:16",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2006.07409": {
+        "success": true,
+        "arxiv_id": "2006.07409",
+        "pdf_filename": "pdf/2006.07409.pdf",
+        "source_cleaned_filename": "source_cleaned/2006.07409/neurips_2020.consolidated.tex",
+        "source_token_count_estimate": 27058,
+        "title": "How to Avoid Being Eaten by a Grue: Structured Exploration Strategies for Textual Worlds",
+        "year": "2020",
+        "authors": [
+            "Prithviraj Ammanabrolu",
+            "Ethan Tien",
+            "Matthew Hausknecht",
+            "Mark O. Riedl"
+        ],
+        "date_added": "2025-03-17 12:17:14",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2012.02757": {
+        "success": true,
+        "arxiv_id": "2012.02757",
+        "pdf_filename": "pdf/2012.02757.pdf",
+        "source_cleaned_filename": "source_cleaned/2012.02757/Augmenting Text Adventure Playing Reinforcement Learning With Commonsense and Transformer-Based Knowledge/main.consolidated.tex",
+        "source_token_count_estimate": null,
+        "title": "Playing Text-Based Games with Common Sense",
+        "year": "2020",
+        "authors": [
+            "Sahith Dambekodi",
+            "Spencer Frazier",
+            "Prithviraj Ammanabrolu",
+            "Mark O. Riedl"
+        ],
+        "date_added": "2025-03-17 12:17:48",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2005.00811": {
+        "success": true,
+        "arxiv_id": "2005.00811",
+        "pdf_filename": "pdf/2005.00811.pdf",
+        "source_cleaned_filename": "source_cleaned/2005.00811/iqa.consolidated.tex",
+        "source_token_count_estimate": 18278,
+        "title": "Enhancing Text-based Reinforcement Learning Agents with Commonsense Knowledge",
+        "year": "2020",
+        "authors": [
+            "Keerthiram Murugesan",
+            "Mattia Atzeni",
+            "Pushkar Shukla",
+            "Mrinmaya Sachan",
+            "Pavan Kapanipathi",
+            "Kartik Talamadupula"
+        ],
+        "date_added": "2025-03-17 12:18:35",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2001.08837": {
+        "success": true,
+        "arxiv_id": "2001.08837",
+        "pdf_filename": "pdf/2001.08837.pdf",
+        "source_cleaned_filename": "source_cleaned/2001.08837/iclr2020_conference.consolidated.tex",
+        "source_token_count_estimate": 64913,
+        "title": "Graph Constrained Reinforcement Learning for Natural Language Action Spaces",
+        "year": "2020",
+        "authors": [
+            "Prithviraj Ammanabrolu",
+            "Matthew Hausknecht"
+        ],
+        "date_added": "2025-03-17 12:19:11",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1911.12511": {
+        "success": true,
+        "arxiv_id": "1911.12511",
+        "pdf_filename": "pdf/1911.12511.pdf",
+        "source_cleaned_filename": "source_cleaned/1911.12511/main.consolidated.tex",
+        "source_token_count_estimate": 18999,
+        "title": "Algorithmic Improvements for Deep Reinforcement Learning applied to Interactive Fiction",
+        "year": "2019",
+        "authors": [
+            "Vishal Jain",
+            "William Fedus",
+            "Hugo Larochelle",
+            "Doina Precup",
+            "Marc G. Bellemare"
+        ],
+        "date_added": "2025-03-17 12:19:53",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2010.11655": {
+        "success": true,
+        "arxiv_id": "2010.11655",
+        "pdf_filename": "pdf/2010.11655.pdf",
+        "source_cleaned_filename": "source_cleaned/2010.11655/neurips_xyq.consolidated.tex",
+        "source_token_count_estimate": 54542,
+        "title": "Deep Reinforcement Learning with Stacked Hierarchical Attention for Text-based Games",
+        "year": "2020",
+        "authors": [
+            "Yunqiu Xu",
+            "Meng Fang",
+            "Ling Chen",
+            "Yali Du",
+            "Joey Tianyi Zhou",
+            "Chengqi Zhang"
+        ],
+        "date_added": "2025-03-17 12:20:42",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2001.08868": {
+        "success": true,
+        "arxiv_id": "2001.08868",
+        "pdf_filename": "pdf/2001.08868.pdf",
+        "source_cleaned_filename": "source_cleaned/2001.08868/iclr2020_conference.consolidated.tex",
+        "source_token_count_estimate": 49879,
+        "title": "Exploration Based Language Learning for Text-Based Games",
+        "year": "2020",
+        "authors": [
+            "Andrea Madotto",
+            "Mahdi Namazifar",
+            "Joost Huizinga",
+            "Piero Molino",
+            "Adrien Ecoffet",
+            "Huaixiu Zheng",
+            "Alexandros Papangelis",
+            "Dian Yu",
+            "Chandra Khatri",
+            "Gokhan Tur"
+        ],
+        "date_added": "2025-03-17 12:21:20",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2004.02986": {
+        "success": true,
+        "arxiv_id": "2004.02986",
+        "pdf_filename": "pdf/2004.02986.pdf",
+        "source_cleaned_filename": "source_cleaned/2004.02986/ACL'20%20SNN-DRRN/acl2020.consolidated.tex",
+        "source_token_count_estimate": null,
+        "title": "Zero-Shot Learning of Text Adventure Games with Sentence-Level Semantics",
+        "year": "2020",
+        "authors": [
+            "Xusen Yin",
+            "Jonathan May"
+        ],
+        "date_added": "2025-03-17 12:21:36",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1909.01646": {
+        "success": true,
+        "arxiv_id": "1909.01646",
+        "pdf_filename": "pdf/1909.01646.pdf",
+        "source_cleaned_filename": "source_cleaned/1909.01646/ftwp_arxiv.consolidated.tex",
+        "source_token_count_estimate": 12853,
+        "title": "LeDeepChef: Deep Reinforcement Learning Agent for Families of Text-Based Games",
+        "year": "2019",
+        "authors": [
+            "Leonard Adolphs",
+            "Thomas Hofmann"
+        ],
+        "date_added": "2025-03-17 12:21:57",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1812.01628": {
+        "success": true,
+        "arxiv_id": "1812.01628",
+        "pdf_filename": "pdf/1812.01628.pdf",
+        "source_cleaned_filename": "source_cleaned/1812.01628/naaclhlt2019.consolidated.tex",
+        "source_token_count_estimate": 14294,
+        "title": "Playing Text-Adventure Games with Graph-Based Deep Reinforcement Learning",
+        "year": "2018",
+        "authors": [
+            "Prithviraj Ammanabrolu",
+            "Mark O. Riedl"
+        ],
+        "date_added": "2025-03-17 12:22:42",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1905.02265": {
+        "success": true,
+        "arxiv_id": "1905.02265",
+        "pdf_filename": "pdf/1905.02265.pdf",
+        "source_cleaned_filename": "source_cleaned/1905.02265/cog.consolidated.tex",
+        "source_token_count_estimate": 13074,
+        "title": "Comprehensible Context-driven Text Game Playing",
+        "year": "2019",
+        "authors": [
+            "Xusen Yin",
+            "Jonathan May"
+        ],
+        "date_added": "2025-03-17 12:23:20",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1908.04777": {
+        "success": true,
+        "arxiv_id": "1908.04777",
+        "pdf_filename": "pdf/1908.04777.pdf",
+        "source_cleaned_filename": "source_cleaned/1908.04777/ijcai20.consolidated.tex",
+        "source_token_count_estimate": 14744,
+        "title": "Learn How to Cook a New Recipe in a New House: Using Map Familiarization, Curriculum Learning, and Bandit Feedback to Learn Families of Text-Based Adventure Games",
+        "year": "2019",
+        "authors": [
+            "Xusen Yin",
+            "Jonathan May"
+        ],
+        "date_added": "2025-03-17 12:24:31",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1902.04259": {
+        "success": true,
+        "arxiv_id": "1902.04259",
+        "pdf_filename": "pdf/1902.04259.pdf",
+        "source_cleaned_filename": "source_cleaned/1902.04259/main.consolidated.tex",
+        "source_token_count_estimate": 13603,
+        "title": "NAIL: A General Interactive Fiction Agent",
+        "year": "2019",
+        "authors": [
+            "Matthew Hausknecht",
+            "Ricky Loynd",
+            "Greg Yang",
+            "Adith Swaminathan",
+            "Jason D. Williams"
+        ],
+        "date_added": "2025-03-17 12:25:17",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1805.07274": {
+        "success": true,
+        "arxiv_id": "1805.07274",
+        "pdf_filename": "pdf/1805.07274.pdf",
+        "source_cleaned_filename": "source_cleaned/1805.07274/main.consolidated.tex",
+        "source_token_count_estimate": 13033,
+        "title": "Language Expansion In Text-Based Games",
+        "year": "2018",
+        "authors": [
+            "Ghulam Ahmed Ansari",
+            "Sagar J P",
+            "Sarath Chandar",
+            "Balaraman Ravindran"
+        ],
+        "date_added": "2025-03-17 12:25:56",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1806.11525": {
+        "success": true,
+        "arxiv_id": "1806.11525",
+        "pdf_filename": "pdf/1806.11525.pdf",
+        "source_cleaned_filename": "source_cleaned/1806.11525/main.consolidated.tex",
+        "source_token_count_estimate": 9531,
+        "title": "Counting to Explore and Generalize in Text-based Games",
+        "year": "2018",
+        "authors": [
+            "Xingdi Yuan",
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "Alessandro Sordoni",
+            "Romain Laroche",
+            "Remi Tachet des Combes",
+            "Matthew Hausknecht",
+            "Adam Trischler"
+        ],
+        "date_added": "2025-03-17 12:26:30",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1703.03429": {
+        "success": true,
+        "arxiv_id": "1703.03429",
+        "pdf_filename": "pdf/1703.03429.pdf",
+        "source_cleaned_filename": "source_cleaned/1703.03429/main.consolidated.tex",
+        "source_token_count_estimate": 13635,
+        "title": "What can you do with a rock? Affordance extraction via word embeddings",
+        "year": "2017",
+        "authors": [
+            "Nancy Fulda",
+            "Daniel Ricks",
+            "Ben Murdoch",
+            "David Wingate"
+        ],
+        "date_added": "2025-03-17 12:27:00",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1705.05637": {
+        "success": true,
+        "arxiv_id": "1705.05637",
+        "pdf_filename": "pdf/1705.05637.pdf",
+        "source_cleaned_filename": "source_cleaned/1705.05637/main.consolidated.tex",
+        "source_token_count_estimate": 21176,
+        "title": "Text-based Adventures of the Golovin AI Agent",
+        "year": "2017",
+        "authors": [
+            "Bartosz Kostka",
+            "Jaroslaw Kwiecien",
+            "Jakub Kowalski",
+            "Pawel Rychlikowski"
+        ],
+        "date_added": "2025-03-17 12:27:33",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2212.10618": {
+        "success": true,
+        "arxiv_id": "2212.10618",
+        "pdf_filename": "pdf/2212.10618.pdf",
+        "source_cleaned_filename": "source_cleaned/2212.10618/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 32588,
+        "title": "Ontologically Faithful Generation of Non-Player Character Dialogues",
+        "year": "2022",
+        "authors": [
+            "Nathaniel Weir",
+            "Ryan Thomas",
+            "Randolph D'Amore",
+            "Kellie Hill",
+            "Benjamin Van Durme",
+            "Harsh Jhamtani"
+        ],
+        "date_added": "2025-03-17 12:28:17",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2106.09578": {
+        "success": true,
+        "arxiv_id": "2106.09578",
+        "pdf_filename": "pdf/2106.09578.pdf",
+        "source_cleaned_filename": "source_cleaned/2106.09578/neurips_2021.consolidated.tex",
+        "source_token_count_estimate": 23659,
+        "title": "Modeling Worlds in Text",
+        "year": "2021",
+        "authors": [
+            "Prithviraj Ammanabrolu",
+            "Mark O. Riedl"
+        ],
+        "date_added": "2025-03-17 12:28:51",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1903.03094": {
+        "success": true,
+        "arxiv_id": "1903.03094",
+        "pdf_filename": "pdf/1903.03094.pdf",
+        "source_cleaned_filename": "source_cleaned/1903.03094/acl2019.consolidated.tex",
+        "source_token_count_estimate": 37504,
+        "title": "Learning to Speak and Act in a Fantasy Text Adventure Game",
+        "year": "2019",
+        "authors": [
+            "Jack Urbanek",
+            "Angela Fan",
+            "Siddharth Karamcheti",
+            "Saachi Jain",
+            "Samuel Humeau",
+            "Emily Dinan",
+            "Tim Rockt\u00e4schel",
+            "Douwe Kiela",
+            "Arthur Szlam",
+            "Jason Weston"
+        ],
+        "date_added": "2025-03-17 12:29:45",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2103.07011": {
+        "success": true,
+        "arxiv_id": "2103.07011",
+        "pdf_filename": "pdf/2103.07011.pdf",
+        "source_cleaned_filename": "source_cleaned/2103.07011/acl.consolidated.tex",
+        "source_token_count_estimate": 25560,
+        "title": "Towards Socially Intelligent Agents with Mental State Transition and Human Utility",
+        "year": "2021",
+        "authors": [
+            "Liang Qiu",
+            "Yizhou Zhao",
+            "Yuan Liang",
+            "Pan Lu",
+            "Weiyan Shi",
+            "Zhou Yu",
+            "Song-Chun Zhu"
+        ],
+        "date_added": "2025-03-17 12:30:30",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2002.02878": {
+        "success": true,
+        "arxiv_id": "2002.02878",
+        "pdf_filename": "pdf/2002.02878.pdf",
+        "source_cleaned_filename": "source_cleaned/2002.02878/main.consolidated.tex",
+        "source_token_count_estimate": 32128,
+        "title": "I love your chain mail! Making knights smile in a fantasy game world: Open-domain goal-oriented dialogue agents",
+        "year": "2020",
+        "authors": [
+            "Shrimai Prabhumoye",
+            "Margaret Li",
+            "Jack Urbanek",
+            "Emily Dinan",
+            "Douwe Kiela",
+            "Jason Weston",
+            "Arthur Szlam"
+        ],
+        "date_added": "2025-03-17 12:31:06",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1808.01262": {
+        "success": true,
+        "arxiv_id": "1808.01262",
+        "pdf_filename": "pdf/1808.01262.pdf",
+        "source_cleaned_filename": "source_cleaned/1808.01262/artificial-adventurer.consolidated.tex",
+        "source_token_count_estimate": 13864,
+        "title": "The Text-Based Adventure AI Competition",
+        "year": "2018",
+        "authors": [
+            "Timothy Atkinson",
+            "Hendrik Baier",
+            "Tara Copplestone",
+            "Sam Devlin",
+            "Jerry Swan"
+        ],
+        "date_added": "2025-03-17 12:31:30",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1908.10909": {
+        "success": true,
+        "arxiv_id": "1908.10909",
+        "pdf_filename": "pdf/1908.10909.pdf",
+        "source_cleaned_filename": "source_cleaned/1908.10909/qait_camera_ready.consolidated.tex",
+        "source_token_count_estimate": 56346,
+        "title": "Interactive Language Learning by Question Answering",
+        "year": "2019",
+        "authors": [
+            "Xingdi Yuan",
+            "Marc-Alexandre Cote",
+            "Jie Fu",
+            "Zhouhan Lin",
+            "Christopher Pal",
+            "Yoshua Bengio",
+            "Adam Trischler"
+        ],
+        "date_added": "2025-03-17 12:32:04",
+        "topics": [
+            "agents"
+        ]
+    },
+    "1905.09700": {
+        "success": true,
+        "arxiv_id": "1905.09700",
+        "pdf_filename": "pdf/1905.09700.pdf",
+        "source_cleaned_filename": "source_cleaned/1905.09700/main.consolidated.tex",
+        "source_token_count_estimate": 29768,
+        "title": "Action Assembly: Sparse Imitation Learning for Text Based Games with Combinatorial Action Spaces",
+        "year": "2019",
+        "authors": [
+            "Chen Tessler",
+            "Tom Zahavy",
+            "Deborah Cohen",
+            "Daniel J. Mankowitz",
+            "Shie Mannor"
+        ],
+        "date_added": "2025-03-17 12:32:37",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.14879": {
+        "success": true,
+        "arxiv_id": "2305.14879",
+        "pdf_filename": "pdf/2305.14879.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.14879/emnlp2023.consolidated.tex",
+        "source_token_count_estimate": 24982,
+        "title": "ByteSized32: A Corpus and Challenge Task for Generating Task-Specific World Models Expressed as Text Games",
+        "year": "2023",
+        "authors": [
+            "Ruoyao Wang",
+            "Graham Todd",
+            "Eric Yuan",
+            "Ziang Xiao",
+            "Marc-Alexandre C\u00f4t\u00e9",
+            "Peter Jansen"
+        ],
+        "date_added": "2025-03-17 12:33:10",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2305.14874": {
+        "success": true,
+        "arxiv_id": "2305.14874",
+        "pdf_filename": "pdf/2305.14874.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.14874/emnlp2023.consolidated.tex",
+        "source_token_count_estimate": 24666,
+        "title": "From Words to Wires: Generating Functioning Electronic Devices from Natural Language Descriptions",
+        "year": "2023",
+        "authors": [
+            "Peter Jansen"
+        ],
+        "date_added": "2025-03-17 12:33:52",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2107.08146": {
+        "success": true,
+        "arxiv_id": "2107.08146",
+        "pdf_filename": "pdf/2107.08146.pdf",
+        "source_cleaned_filename": "source_cleaned/2107.08146/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 7979,
+        "title": "Picard understanding Darmok: A Dataset and Model for Metaphor-Rich Translation in a Constructed Language",
+        "year": "2021",
+        "authors": [
+            "Peter Jansen",
+            "Jordan Boyd-Graber"
+        ],
+        "date_added": "2025-03-17 12:34:22",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2310.10134": {
+        "success": true,
+        "arxiv_id": "2310.10134",
+        "pdf_filename": "pdf/2310.10134.pdf",
+        "source_cleaned_filename": "source_cleaned/2310.10134/paper_arxiv.consolidated.tex",
+        "source_token_count_estimate": 76474,
+        "title": "CLIN: A Continually Learning Language Agent for Rapid Task Adaptation and Generalization",
+        "year": "2023",
+        "authors": [
+            "Bodhisattwa Prasad Majumder",
+            "Bhavana Dalvi Mishra",
+            "Peter Jansen",
+            "Oyvind Tafjord",
+            "Niket Tandon",
+            "Li Zhang",
+            "Chris Callison-Burch",
+            "Peter Clark"
+        ],
+        "date_added": "2025-03-17 12:35:31",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2402.03244": {
+        "success": true,
+        "arxiv_id": "2402.03244",
+        "pdf_filename": "pdf/2402.03244.pdf",
+        "source_cleaned_filename": "source_cleaned/2402.03244/main.consolidated.tex",
+        "source_token_count_estimate": 18624,
+        "title": "Skill Set Optimization: Reinforcing Language Model Behavior via Transferable Skills",
+        "year": "2024",
+        "authors": [
+            "Kolby Nottingham",
+            "Bodhisattwa Prasad Majumder",
+            "Bhavana Dalvi Mishra",
+            "Sameer Singh",
+            "Peter Clark",
+            "Roy Fox"
+        ],
+        "date_added": "2025-03-17 12:36:06",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2401.16467": {
+        "success": true,
+        "arxiv_id": "2401.16467",
+        "pdf_filename": "pdf/2401.16467.pdf",
+        "source_cleaned_filename": "source_cleaned/2401.16467/icml_version.consolidated.tex",
+        "source_token_count_estimate": 31552,
+        "title": "ReGAL: Refactoring Programs to Discover Generalizable Abstractions",
+        "year": "2024",
+        "authors": [
+            "Elias Stengel-Eskin",
+            "Archiki Prasad",
+            "Mohit Bansal"
+        ],
+        "date_added": "2025-03-17 12:36:50",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2308.10144": {
+        "success": true,
+        "arxiv_id": "2308.10144",
+        "pdf_filename": "pdf/2308.10144.pdf",
+        "source_cleaned_filename": "source_cleaned/2308.10144/main.consolidated.tex",
+        "source_token_count_estimate": 30532,
+        "title": "ExpeL: LLM Agents Are Experiential Learners",
+        "year": "2023",
+        "authors": [
+            "Andrew Zhao",
+            "Daniel Huang",
+            "Quentin Xu",
+            "Matthieu Lin",
+            "Yong-Jin Liu",
+            "Gao Huang"
+        ],
+        "date_added": "2025-03-17 12:37:47",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2407.01725": {
+        "success": true,
+        "arxiv_id": "2407.01725",
+        "pdf_filename": "pdf/2407.01725.pdf",
+        "source_cleaned_filename": "source_cleaned/2407.01725/DiscoveryBench.consolidated.tex",
+        "source_token_count_estimate": 103499,
+        "title": "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models",
+        "year": "2024",
+        "authors": [
+            "Bodhisattwa Prasad Majumder",
+            "Harshit Surana",
+            "Dhruv Agarwal",
+            "Bhavana Dalvi Mishra",
+            "Abhijeetsingh Meena",
+            "Aryan Prakhar",
+            "Tirth Vora",
+            "Tushar Khot",
+            "Ashish Sabharwal",
+            "Peter Clark"
+        ],
+        "date_added": "2025-03-17 12:38:07",
+        "topics": [
+            "agents"
+        ]
+    },
+    "2310.15421": {
+        "success": true,
+        "arxiv_id": "2310.15421",
+        "pdf_filename": "pdf/2310.15421.pdf",
+        "source_cleaned_filename": "source_cleaned/2310.15421/main.consolidated.tex",
+        "source_token_count_estimate": 33809,
+        "title": "FANToM: A Benchmark for Stress-testing Machine Theory of Mind in Interactions",
+        "year": "2023",
+        "authors": [
+            "Hyunwoo Kim",
+            "Melanie Sclar",
+            "Xuhui Zhou",
+            "Ronan Le Bras",
+            "Gunhee Kim",
+            "Yejin Choi",
+            "Maarten Sap"
+        ],
+        "date_added": "2025-03-17 12:38:20",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2302.08399": {
+        "success": true,
+        "arxiv_id": "2302.08399",
+        "pdf_filename": "pdf/2302.08399.pdf",
+        "source_cleaned_filename": "source_cleaned/2302.08399/main.consolidated.tex",
+        "source_token_count_estimate": 10370,
+        "title": "Large Language Models Fail on Trivial Alterations to Theory-of-Mind Tasks",
+        "year": "2023",
+        "authors": [
+            "Tomer Ullman"
+        ],
+        "date_added": "2025-03-17 12:38:34",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2401.08743": {
+        "success": true,
+        "arxiv_id": "2401.08743",
+        "pdf_filename": "pdf/2401.08743.pdf",
+        "source_cleaned_filename": "source_cleaned/2401.08743/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 47944,
+        "title": "MMToM-QA: Multimodal Theory of Mind Question Answering",
+        "year": "2024",
+        "authors": [
+            "Chuanyang Jin",
+            "Yutong Wu",
+            "Jing Cao",
+            "Jiannan Xiang",
+            "Yen-Ling Kuo",
+            "Zhiting Hu",
+            "Tomer Ullman",
+            "Antonio Torralba",
+            "Joshua B. Tenenbaum",
+            "Tianmin Shu"
+        ],
+        "date_added": "2025-03-17 12:39:13",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2402.06044": {
+        "success": true,
+        "arxiv_id": "2402.06044",
+        "pdf_filename": "pdf/2402.06044.pdf",
+        "source_cleaned_filename": "source_cleaned/2402.06044/OpenToM.consolidated.tex",
+        "source_token_count_estimate": 48805,
+        "title": "OpenToM: A Comprehensive Benchmark for Evaluating Theory-of-Mind Reasoning Capabilities of Large Language Models",
+        "year": "2024",
+        "authors": [
+            "Hainiu Xu",
+            "Runcong Zhao",
+            "Lixing Zhu",
+            "Jinhua Du",
+            "Yulan He"
+        ],
+        "date_added": "2025-03-17 12:39:51",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2310.03051": {
+        "success": true,
+        "arxiv_id": "2310.03051",
+        "pdf_filename": "pdf/2310.03051.pdf",
+        "source_cleaned_filename": "source_cleaned/2310.03051/T4D_FaR.consolidated.tex",
+        "source_token_count_estimate": 41219,
+        "title": "How FaR Are Large Language Models From Agents with Theory-of-Mind?",
+        "year": "2023",
+        "authors": [
+            "Pei Zhou",
+            "Aman Madaan",
+            "Srividya Pranavi Potharaju",
+            "Aditya Gupta",
+            "Kevin R. McKee",
+            "Ari Holtzman",
+            "Jay Pujara",
+            "Xiang Ren",
+            "Swaroop Mishra",
+            "Aida Nematzadeh",
+            "Shyam Upadhyay",
+            "Manaal Faruqui"
+        ],
+        "date_added": "2025-03-17 12:40:22",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2402.15052": {
+        "success": true,
+        "arxiv_id": "2402.15052",
+        "pdf_filename": "pdf/2402.15052.pdf",
+        "source_cleaned_filename": "source_cleaned/2402.15052/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 92852,
+        "title": "ToMBench: Benchmarking Theory of Mind in Large Language Models",
+        "year": "2024",
+        "authors": [
+            "Zhuang Chen",
+            "Jincenzi Wu",
+            "Jinfeng Zhou",
+            "Bosi Wen",
+            "Guanqun Bi",
+            "Gongyao Jiang",
+            "Yaru Cao",
+            "Mengting Hu",
+            "Yunghwei Lai",
+            "Zexuan Xiong",
+            "Minlie Huang"
+        ],
+        "date_added": "2025-03-17 12:40:57",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2410.13648": {
+        "success": true,
+        "arxiv_id": "2410.13648",
+        "pdf_filename": "pdf/2410.13648.pdf",
+        "source_cleaned_filename": "source_cleaned/2410.13648/iclr2025_conference_arxiv.consolidated.tex",
+        "source_token_count_estimate": 73340,
+        "title": "SimpleToM: Exposing the Gap between Explicit ToM Inference and Implicit ToM Application in LLMs",
+        "year": "2024",
+        "authors": [
+            "Yuling Gu",
+            "Oyvind Tafjord",
+            "Hyunwoo Kim",
+            "Jared Moore",
+            "Ronan Le Bras",
+            "Peter Clark",
+            "Yejin Choi"
+        ],
+        "date_added": "2025-03-17 12:42:19",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "1808.09352": {
+        "success": true,
+        "arxiv_id": "1808.09352",
+        "pdf_filename": "pdf/1808.09352.pdf",
+        "source_cleaned_filename": "source_cleaned/1808.09352/00-main.consolidated.tex",
+        "source_token_count_estimate": 12834,
+        "title": "Evaluating Theory of Mind in Question Answering",
+        "year": "2018",
+        "authors": [
+            "Aida Nematzadeh",
+            "Kaylee Burns",
+            "Erin Grant",
+            "Alison Gopnik",
+            "Thomas L. Griffiths"
+        ],
+        "date_added": "2025-03-17 12:42:43",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2310.16755": {
+        "success": true,
+        "arxiv_id": "2310.16755",
+        "pdf_filename": "pdf/2310.16755.pdf",
+        "source_cleaned_filename": "source_cleaned/2310.16755/emnlp2023_final.consolidated.tex",
+        "source_token_count_estimate": 25964,
+        "title": "HI-TOM: A Benchmark for Evaluating Higher-Order Theory of Mind Reasoning in Large Language Models",
+        "year": "2023",
+        "authors": [
+            "Yinghui He",
+            "Yufan Wu",
+            "Yilin Jia",
+            "Rada Mihalcea",
+            "Yulong Chen",
+            "Naihao Deng"
+        ],
+        "date_added": "2025-03-17 12:43:15",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2212.10060": {
+        "success": true,
+        "arxiv_id": "2212.10060",
+        "pdf_filename": "pdf/2212.10060.pdf",
+        "source_cleaned_filename": "source_cleaned/2212.10060/main.consolidated.tex",
+        "source_token_count_estimate": 32941,
+        "title": "I Cast Detect Thoughts: Learning to Converse and Guide with Intents and Theory-of-Mind in Dungeons and Dragons",
+        "year": "2022",
+        "authors": [
+            "Pei Zhou",
+            "Andrew Zhu",
+            "Jennifer Hu",
+            "Jay Pujara",
+            "Xiang Ren",
+            "Chris Callison-Burch",
+            "Yejin Choi",
+            "Prithviraj Ammanabrolu"
+        ],
+        "date_added": "2025-03-17 12:43:47",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2311.10227": {
+        "success": true,
+        "arxiv_id": "2311.10227",
+        "pdf_filename": "pdf/2311.10227.pdf",
+        "source_cleaned_filename": "source_cleaned/2311.10227/acl_latex.consolidated.tex",
+        "source_token_count_estimate": 32098,
+        "title": "Think Twice: Perspective-Taking Improves Large Language Models' Theory-of-Mind Capabilities",
+        "year": "2023",
+        "authors": [
+            "Alex Wilf",
+            "Sihyun Shawn Lee",
+            "Paul Pu Liang",
+            "Louis-Philippe Morency"
+        ],
+        "date_added": "2025-03-17 12:44:10",
+        "topics": [
+            "theory-of-mind"
+        ]
+    },
+    "2305.14763": {
+        "success": true,
+        "arxiv_id": "2305.14763",
+        "pdf_filename": "pdf/2305.14763.pdf",
+        "source_cleaned_filename": "source_cleaned/2305.14763/main.consolidated.tex",
+        "source_token_count_estimate": 25413,
+        "title": "Clever Hans or Neural Theory of Mind? Stress Testing Social Reasoning in Large Language Models",
+        "year": "2023",
+        "authors": [
+            "Natalie Shapira",
+            "Mosh Levy",
+            "Seyed Hossein Alavi",
+            "Xuhui Zhou",
+            "Yejin Choi",
+            "Yoav Goldberg",
+            "Maarten Sap",
+            "Vered Shwartz"
+        ],
+        "date_added": "2025-03-17 12:44:35",
+        "topics": [
+            "theory-of-mind"
+        ]
+    }
+}

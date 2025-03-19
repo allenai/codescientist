@@ -1,0 +1,22 @@
+[
+    {
+        "filename_bulk_report": "metaanalysis/report.my-benchmark-run-full50-withexpertnotes-5variations-commonlibraryideator-sonnet35-1-2025-02-04-15-09-26.report2025-03-10-14-45-41.bulk.tsv",
+        "filename_metaanalysis_report": "metaanalysis/report.my-benchmark-run-full50-withexpertnotes-5variations-commonlibraryideator-sonnet35-1-2025-02-04-15-09-26.report2025-03-10-14-45-41.meta-analysis.tsv",
+        "filename_metaanalysis_report_json": "metaanalysis/report.my-benchmark-run-full50-withexpertnotes-5variations-commonlibraryideator-sonnet35-1-2025-02-04-15-09-26.report2025-03-10-14-45-41.meta-analysis.json",
+        "batch_run": "my-benchmark-run-full50-withexpertnotes-5variations-commonlibraryideator-sonnet35-1-2025-02-04-15-09-26",
+        "bulk_experiment_run": null,
+        "bulk_experiment_run_files": null,
+        "timestamp": "2025-03-10 14:45:41",
+        "notes": "50 text game ideas (with expert notes)"
+    },
+    {
+        "filename_bulk_report": "metaanalysis/report.my-benchmark-run-full50-noexpertnotes-5variations-commonlibraryideator-sonnet35-2025-02-24-09-51-31.report2025-03-10-14-55-08.bulk.tsv",
+        "filename_metaanalysis_report": "metaanalysis/report.my-benchmark-run-full50-noexpertnotes-5variations-commonlibraryideator-sonnet35-2025-02-24-09-51-31.report2025-03-10-14-55-08.meta-analysis.tsv",
+        "filename_metaanalysis_report_json": "metaanalysis/report.my-benchmark-run-full50-noexpertnotes-5variations-commonlibraryideator-sonnet35-2025-02-24-09-51-31.report2025-03-10-14-55-08.meta-analysis.json",
+        "batch_run": "my-benchmark-run-full50-noexpertnotes-5variations-commonlibraryideator-sonnet35-2025-02-24-09-51-31",
+        "bulk_experiment_run": null,
+        "bulk_experiment_run_files": null,
+        "timestamp": "2025-03-10 14:55:08",
+        "notes": "50 text game ideas (without expert notes)"
+    }
+]

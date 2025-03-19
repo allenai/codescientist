@@ -1,0 +1,15 @@
+{
+    "example-model-name":           {"cost_per_1M_prompt_tokens": 20.0, "cost_per_1M_completion_tokens": 20.0},
+    "gpt-3.5-turbo-1106":           {"cost_per_1M_prompt_tokens": 1.00, "cost_per_1M_completion_tokens": 2.00},
+    "gpt-4-turbo":                  {"cost_per_1M_prompt_tokens": 10.0, "cost_per_1M_completion_tokens": 30.00},
+    "gpt-4o":                       {"cost_per_1M_prompt_tokens": 2.50, "cost_per_1M_completion_tokens": 10.00},
+    "gpt-4o-mini":                  {"cost_per_1M_prompt_tokens": 0.15, "cost_per_1M_completion_tokens": 0.60},
+    "o1-preview":                   {"cost_per_1M_prompt_tokens": 15.00, "cost_per_1M_completion_tokens": 60.00},
+    "o1-mini":                      {"cost_per_1M_prompt_tokens": 3.00, "cost_per_1M_completion_tokens": 12.00},
+    "claude-3-5-sonnet-20240620":   {"cost_per_1M_prompt_tokens": 3.00, "cost_per_1M_completion_tokens": 15.00},
+    "claude-3-5-sonnet-20241022":   {"cost_per_1M_prompt_tokens": 3.00, "cost_per_1M_completion_tokens": 15.00},
+    "together_ai/mistralai/Mixtral-8x7B-Instruct-v0.1": {"cost_per_1M_prompt_tokens": 0.60, "cost_per_1M_completion_tokens": 0.60},
+    "together_ai/meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo": {"cost_per_1M_prompt_tokens": 0.18, "cost_per_1M_completion_tokens": 0.18},
+    "text-embedding-3-large":        {"cost_per_1M_tokens": 0.12},
+    "text-embedding-3-small":        {"cost_per_1M_tokens": 0.02}
+}
