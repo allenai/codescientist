@@ -90,7 +90,7 @@ What you'll find in this repository:
 
 ## 0. Paper 
 
-*CodeScientist* is described in the following paper: [CodeScientist: End-to-End Semi-Automated Scientific Discovery with Code-based Experimentation](http://www.todo.com).
+*CodeScientist* is described in the following paper: [CodeScientist: End-to-End Semi-Automated Scientific Discovery with Code-based Experimentation](https://allenai.org/papers/codescientist).
 
 ![codescientist-paper](images/codescientist-paper.png)
 
@@ -858,7 +858,7 @@ All this is to say: The only API keys you should provide to *CodeScientist* are 
 ## 13. Citation
 If you use this work, please reference the following citation:
 ```
-TODO
+Arxiv citation available shortly. 
 ```
 
 <span id="14-license"/>
