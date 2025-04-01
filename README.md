@@ -858,7 +858,15 @@ All this is to say: The only API keys you should provide to *CodeScientist* are 
 ## 13. Citation
 If you use this work, please reference the following citation:
 ```
-Arxiv citation available shortly. 
+@misc{jansen2025codescientistendtoendsemiautomatedscientific,
+      title={CodeScientist: End-to-End Semi-Automated Scientific Discovery with Code-based Experimentation}, 
+      author={Peter Jansen and Oyvind Tafjord and Marissa Radensky and Pao Siangliulue and Tom Hope and Bhavana Dalvi Mishra and Bodhisattwa Prasad Majumder and Daniel S. Weld and Peter Clark},
+      year={2025},
+      eprint={2503.22708},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2503.22708}, 
+} 
 ```
 
 <span id="14-license"/>
