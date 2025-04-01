@@ -90,7 +90,7 @@ What you'll find in this repository:
 
 ## 0. Paper 
 
-*CodeScientist* is described in the following paper: [CodeScientist: End-to-End Semi-Automated Scientific Discovery with Code-based Experimentation](https://allenai.org/papers/codescientist).
+*CodeScientist* is described in the following paper: [CodeScientist: End-to-End Semi-Automated Scientific Discovery with Code-based Experimentation](https://arxiv.org/abs/2503.22708).
 
 ![codescientist-paper](images/codescientist-paper.png)
 
