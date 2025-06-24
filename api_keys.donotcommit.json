@@ -1,0 +1,5 @@
+{
+    "openai": "YOUR_OPENAI_API_KEY_HERE",
+    "anthropic": "YOUR_ANTHROPIC_API_KEY_HERE",
+    "deepseek": "YOUR_DEEPSEEK_API_KEY_HERE"
+} 
